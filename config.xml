@@ -3,11 +3,81 @@
     <modules>
         <module category="Datenaustausch" context="hsl20_3_json" id="14105" name="go-eCharger (14105)" version="0.1">
             <inputs>
-            	<input type="number" const_name="nVal" init_value="0">Value</input>				
-                <input type="number" const_name="nChange" init_value="10">Mind. Änderung (abs)</input>
+            	<input type="number" const_name="n_in_amp" init_value="0">Ampere für PWM Signalisierung</input>
+            	<input type="number" const_name="n_in_ast" init_value="0">Access State</input>
+            	<input type="number" const_name="n_in_alw" init_value="0">Allow Charging</input>
+				<input type="number" const_name="n_in_stp" init_value="0">Stop State</input>
+            	<input type="number" const_name="n_in_dwo" init_value="0">Abschaltwert</input>
+            	<input type="string" const_name="s_in_wss" init_value="">WLAN SSID</input>
+            	<input type="string" const_name="s_in_wke" init_value="">WLAN Key</input>
+            	<input type="number" const_name="n_in_wen" init_value="0">Wifi Enabled</input>
+            	<input type="number" const_name="n_in_tof" init_value="0">Time Offset</input>
+            	<input type="number" const_name="n_in_tds" init_value="0">Daylight saving time offset</input>
+            	<input type="number" const_name="n_in_lbr" init_value="0">LED Helligkeit</input>
+            	<input type="number" const_name="nVal" init_value="0">aho</input>
+            	<input type="number" const_name="nVal" init_value="0">afi</input>
+            	<input type="number" const_name="nVal" init_value="0">al1</input>
+            	<input type="number" const_name="nVal" init_value="0">al2</input>
+            	<input type="number" const_name="nVal" init_value="0">al3</input>
+            	<input type="number" const_name="nVal" init_value="0">al4</input>
+            	<input type="number" const_name="nVal" init_value="0">al5</input>
+            	<input type="number" const_name="nVal" init_value="0">cid</input>
+            	<input type="number" const_name="nVal" init_value="0">cch</input>
+            	<input type="number" const_name="nVal" init_value="0">cfi</input>
+            	<input type="number" const_name="nVal" init_value="0">lse</input>
+            	<input type="number" const_name="nVal" init_value="0">ust</input>				
+            	<input type="number" const_name="nVal" init_value="0">wak</input>
+				<input type="number" const_name="nVal" init_value="0">r1x</input>
+            	<input type="number" const_name="nVal" init_value="0">dto</input>								
+            	<input type="number" const_name="nVal" init_value="0">nmo</input>
+            	<input type="number" const_name="nVal" init_value="0">rna</input>
+				<input type="number" const_name="nVal" init_value="0">rnm</input>
+				<input type="number" const_name="nVal" init_value="0">rne</input>
+				<input type="number" const_name="nVal" init_value="0">rn1</input>
+				<input type="number" const_name="nVal" init_value="0">rn4</input>
+				<input type="number" const_name="nVal" init_value="0">rn5</input>
+				<input type="number" const_name="nVal" init_value="0">rn6</input>
+				<input type="number" const_name="nVal" init_value="0">rn7</input>				
+				<input type="number" const_name="nVal" init_value="0">rn8</input>
+				<input type="number" const_name="nVal" init_value="0">rn9</input>				
             </inputs>
             <outputs>
-				<output type="number" const_name="nVal" init_value="0">Value</output>
+				<output type="string" const_name="s_out_version" init_value="">Version</output>
+				<output type="number" const_name="n_out_rbc" init_value="0">Reboot Counter</output>
+				<output type="number" const_name="n_out_rbt" init_value="0">Reboot Timer</output>
+				<output type="number" const_name="n_out_car" init_value="0">Status PWM Signalisierung</output>
+				<output type="number" const_name="n_ou_err" init_value="0">Error</output>
+				<output type="number" const_name="n_out_cbl" init_value="0">Typ2 ​Kabel Ampere Kodierung</output>
+				<output type="number" const_name="n_out_pha" init_value="0">Phasen</output>
+				<output type="number" const_name="n_out_cmp" init_value="0">Temperatur​</output>
+				<output type="number" const_name="n_out_dws" init_value="0">Geladene Energiemenge</output>
+				<output type="number" const_name="n_out_adi" init_value="0">Adapter In</output>
+				<output type="number" const_name="n_out_uby" init_value="0">Unlocked by</output>
+				<output type="number" const_name="n_out_eto" init_value="0">Energy Total</output>
+				<output type="number" const_name="n_out_wst" init_value="0">Wifi State</output>
+				<output type="number" const_name="nVal" init_value="0">nrg</output>
+				<output type="string" const_name="s_out_fwv" init_value="">Firmware Version</output>
+				<output type="string" const_name="s_out_sse" init_value="">Seriennummer</output>
+				<output type="number" const_name="nVal" init_value="0">eca</output>
+				<output type="number" const_name="nVal" init_value="0">ecr</output>
+				<output type="number" const_name="nVal" init_value="0">ecd</output>
+				<output type="number" const_name="nVal" init_value="0">ec4</output>
+				<output type="number" const_name="nVal" init_value="0">ec5</output>
+				<output type="number" const_name="nVal" init_value="0">ec6</output>
+				<output type="number" const_name="nVal" init_value="0">ec7</output>
+				<output type="number" const_name="nVal" init_value="0">ec8</output>
+				<output type="number" const_name="nVal" init_value="0">ec9</output>
+				<output type="number" const_name="nVal" init_value="0">ec1</output>
+				<output type="number" const_name="nVal" init_value="0">rca</output>
+				<output type="number" const_name="nVal" init_value="0">rcr</output>
+				<output type="number" const_name="nVal" init_value="0">rcd</output>
+				<output type="number" const_name="nVal" init_value="0">rc1</output>				
+				<output type="number" const_name="nVal" init_value="0">rc4</output>
+				<output type="number" const_name="nVal" init_value="0">rc5</output>
+				<output type="number" const_name="nVal" init_value="0">rc6</output>
+				<output type="number" const_name="nVal" init_value="0">rc7</output>
+				<output type="number" const_name="nVal" init_value="0">rc8</output>
+				<output type="number" const_name="nVal" init_value="0">rc9</output>
             </outputs>               
 			<remanent_variables>
             </remanent_variables>
@@ -16,3 +86,5 @@
         </module>			
     </modules>
 </config>
+       
+                 
