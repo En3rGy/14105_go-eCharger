@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <modules>
+        <module category="Datenaustausch" context="hsl20_3_json" id="14105" name="go-eCharger (14105)" version="0.1">
+            <inputs>
+            	<input type="number" const_name="nVal" init_value="0">Value</input>				
+                <input type="number" const_name="nChange" init_value="10">Mind. Änderung (abs)</input>
+            </inputs>
+            <outputs>
+				<output type="number" const_name="nVal" init_value="0">Value</output>
+            </outputs>               
+			<remanent_variables>
+            </remanent_variables>
+            <imports>
+            </imports>		
+        </module>			
+    </modules>
+</config>
