@@ -3,81 +3,123 @@
     <modules>
         <module category="Datenaustausch" context="hsl20_3_json" id="14105" name="go-eCharger (14105)" version="0.1">
             <inputs>
-            	<input type="number" const_name="n_in_amp" init_value="0">Ampere für PWM Signalisierung</input>
-            	<input type="number" const_name="n_in_ast" init_value="0">Access State</input>
-            	<input type="number" const_name="n_in_alw" init_value="0">Allow Charging</input>
-				<input type="number" const_name="n_in_stp" init_value="0">Stop State</input>
-            	<input type="number" const_name="n_in_dwo" init_value="0">Abschaltwert</input>
-            	<input type="string" const_name="s_in_wss" init_value="">WLAN SSID</input>
-            	<input type="string" const_name="s_in_wke" init_value="">WLAN Key</input>
-            	<input type="number" const_name="n_in_wen" init_value="0">Wifi Enabled</input>
-            	<input type="number" const_name="n_in_tof" init_value="0">Time Offset</input>
-            	<input type="number" const_name="n_in_tds" init_value="0">Daylight saving time offset</input>
-            	<input type="number" const_name="n_in_lbr" init_value="0">LED Helligkeit</input>
-            	<input type="number" const_name="nVal" init_value="0">aho</input>
-            	<input type="number" const_name="nVal" init_value="0">afi</input>
-            	<input type="number" const_name="nVal" init_value="0">al1</input>
-            	<input type="number" const_name="nVal" init_value="0">al2</input>
-            	<input type="number" const_name="nVal" init_value="0">al3</input>
-            	<input type="number" const_name="nVal" init_value="0">al4</input>
-            	<input type="number" const_name="nVal" init_value="0">al5</input>
-            	<input type="number" const_name="nVal" init_value="0">cid</input>
-            	<input type="number" const_name="nVal" init_value="0">cch</input>
-            	<input type="number" const_name="nVal" init_value="0">cfi</input>
-            	<input type="number" const_name="nVal" init_value="0">lse</input>
-            	<input type="number" const_name="nVal" init_value="0">ust</input>				
-            	<input type="number" const_name="nVal" init_value="0">wak</input>
-				<input type="number" const_name="nVal" init_value="0">r1x</input>
-            	<input type="number" const_name="nVal" init_value="0">dto</input>								
-            	<input type="number" const_name="nVal" init_value="0">nmo</input>
-            	<input type="number" const_name="nVal" init_value="0">rna</input>
-				<input type="number" const_name="nVal" init_value="0">rnm</input>
-				<input type="number" const_name="nVal" init_value="0">rne</input>
-				<input type="number" const_name="nVal" init_value="0">rn1</input>
-				<input type="number" const_name="nVal" init_value="0">rn4</input>
-				<input type="number" const_name="nVal" init_value="0">rn5</input>
-				<input type="number" const_name="nVal" init_value="0">rn6</input>
-				<input type="number" const_name="nVal" init_value="0">rn7</input>				
-				<input type="number" const_name="nVal" init_value="0">rn8</input>
-				<input type="number" const_name="nVal" init_value="0">rn9</input>				
+            	<input type="number" const_name="n_amp" init_value="0">Ampere für PWM Signalisierung</input>
+            	<input type="number" const_name="n_ast" init_value="0">Access State</input>
+            	<input type="number" const_name="n_alw" init_value="0">Allow Charging</input>
+				<input type="number" const_name="n_stp" init_value="0">Stop State</input>
+            	<input type="number" const_name="n_dwo" init_value="0">Abschaltwert</input>
+            	<input type="string" const_name="s_wss" init_value="">WLAN SSID</input>
+            	<input type="string" const_name="s_wke" init_value="">WLAN Key</input>
+            	<input type="number" const_name="n_wen" init_value="0">Wifi Enabled</input>
+            	<input type="number" const_name="n_tof" init_value="0">Time Offset</input>
+            	<input type="number" const_name="n_tds" init_value="0">Daylight saving time offset</input>
+            	<input type="number" const_name="n_lbr" init_value="0">LED Helligkeit</input>
+            	<input type="number" const_name="n_aho" init_value="0">Min. auto Ladezeit [h]</input>
+            	<input type="number" const_name="n_afo" init_value="0">Stoppzeit auto laden [h]</input>
+            	<input type="number" const_name="n_al1" init_value="0">Ampere-Level 1 [A]</input>
+            	<input type="number" const_name="n_al2" init_value="0">Ampere-Level 2 [A]</input>
+            	<input type="number" const_name="n_al3" init_value="0">Ampere-Level 3 [A]</input>
+            	<input type="number" const_name="n_al4" init_value="0">Ampere-Level 4 [A]</input>
+            	<input type="number" const_name="n_al5" init_value="0">Ampere-Level 5 [A]</input>
+            	<input type="number" const_name="n_cid" init_value="0">Farbwert Standby</input>
+            	<input type="number" const_name="n_cch" init_value="0">Farbwert Ladevorgang</input>
+            	<input type="number" const_name="n_cfi" init_value="0">Farbwert Ladevorgang Ende</input>
+            	<input type="number" const_name="n_lse" init_value="0">LED Save Energy</input>
+            	<input type="number" const_name="n_ust" init_value="0">Unlock State</input>				
+            	<input type="number" const_name="n_wak" init_value="0">WLAN Hotspot Password</input>
+				<input type="number" const_name="n_r1x" init_value="0">Flags </input>
+            	<input type="number" const_name="n_dto" init_value="0">Restzeit​fenster auto Laden</input>
+            	<input type="number" const_name="n_nmo" init_value="0">Norwegen-Modus​</input>
+            	<input type="number" const_name="n_rna" init_value="0">RFID Karte A Name</input>
+				<input type="number" const_name="n_rnm" init_value="0">RFID Karte N Name</input>
+				<input type="number" const_name="n_rne" init_value="0">RFID Karte E Name</input>
+				<input type="number" const_name="n_rn1" init_value="0">RFID Karte 1 Name</input>
+				<input type="number" const_name="n_rn4" init_value="0">RFID Karte 4 Name</input>
+				<input type="number" const_name="n_rn5" init_value="0">RFID Karte 5 Name</input>
+				<input type="number" const_name="n_rn6" init_value="0">RFID Karte 6 Name</input>
+				<input type="number" const_name="n_rn7" init_value="0">RFID Karte 7 Name</input>
+				<input type="number" const_name="n_rn8" init_value="0">RFID Karte 8 Name</input>
+				<input type="number" const_name="n_rn9" init_value="0">RFID Karte 9 Name</input>
+				<input type="number" const_name="n_azo" init_value="0">Awattar Preiszone</input>
+				<input type="number" const_name="n_ama" init_value="0">Vorgabe max. Ampere</input>
             </inputs>
             <outputs>
 				<output type="string" const_name="s_out_version" init_value="">Version</output>
-				<output type="number" const_name="n_out_rbc" init_value="0">Reboot Counter</output>
-				<output type="number" const_name="n_out_rbt" init_value="0">Reboot Timer</output>
-				<output type="number" const_name="n_out_car" init_value="0">Status PWM Signalisierung</output>
-				<output type="number" const_name="n_ou_err" init_value="0">Error</output>
-				<output type="number" const_name="n_out_cbl" init_value="0">Typ2 ​Kabel Ampere Kodierung</output>
-				<output type="number" const_name="n_out_pha" init_value="0">Phasen</output>
-				<output type="number" const_name="n_out_cmp" init_value="0">Temperatur​</output>
-				<output type="number" const_name="n_out_dws" init_value="0">Geladene Energiemenge</output>
-				<output type="number" const_name="n_out_adi" init_value="0">Adapter In</output>
-				<output type="number" const_name="n_out_uby" init_value="0">Unlocked by</output>
-				<output type="number" const_name="n_out_eto" init_value="0">Energy Total</output>
-				<output type="number" const_name="n_out_wst" init_value="0">Wifi State</output>
-				<output type="number" const_name="nVal" init_value="0">nrg</output>
-				<output type="string" const_name="s_out_fwv" init_value="">Firmware Version</output>
-				<output type="string" const_name="s_out_sse" init_value="">Seriennummer</output>
-				<output type="number" const_name="nVal" init_value="0">eca</output>
-				<output type="number" const_name="nVal" init_value="0">ecr</output>
-				<output type="number" const_name="nVal" init_value="0">ecd</output>
-				<output type="number" const_name="nVal" init_value="0">ec4</output>
-				<output type="number" const_name="nVal" init_value="0">ec5</output>
-				<output type="number" const_name="nVal" init_value="0">ec6</output>
-				<output type="number" const_name="nVal" init_value="0">ec7</output>
-				<output type="number" const_name="nVal" init_value="0">ec8</output>
-				<output type="number" const_name="nVal" init_value="0">ec9</output>
-				<output type="number" const_name="nVal" init_value="0">ec1</output>
-				<output type="number" const_name="nVal" init_value="0">rca</output>
-				<output type="number" const_name="nVal" init_value="0">rcr</output>
-				<output type="number" const_name="nVal" init_value="0">rcd</output>
-				<output type="number" const_name="nVal" init_value="0">rc1</output>				
-				<output type="number" const_name="nVal" init_value="0">rc4</output>
-				<output type="number" const_name="nVal" init_value="0">rc5</output>
-				<output type="number" const_name="nVal" init_value="0">rc6</output>
-				<output type="number" const_name="nVal" init_value="0">rc7</output>
-				<output type="number" const_name="nVal" init_value="0">rc8</output>
-				<output type="number" const_name="nVal" init_value="0">rc9</output>
+				<output type="number" const_name="n_rbc" init_value="0">Reboot Counter</output>
+				<output type="number" const_name="n_rbt" init_value="0">Reboot Timer</output>
+				<output type="number" const_name="n_car" init_value="0">Status PWM Signalisierung</output>
+				<output type="number" const_name="n_rr" init_value="0">Error</output>
+				<output type="number" const_name="n_cbl" init_value="0">Typ2 ​Kabel Ampere Kodierung</output>
+				<output type="number" const_name="n_pha" init_value="0">Phasen</output>
+				<output type="number" const_name="n_cmp" init_value="0">Temperatur​</output>
+				<output type="number" const_name="n_dws" init_value="0">Geladene Energiemenge</output>
+				<output type="number" const_name="n_adi" init_value="0">Adapter In</output>
+				<output type="number" const_name="n_uby" init_value="0">Unlocked by</output>
+				<output type="number" const_name="n_eto" init_value="0">Energy Total</output>
+				<output type="number" const_name="n_wst" init_value="0">Wifi State</output>
+				<output type="number" const_name="n_nrg" init_value="0">nrg</output>
+				<output type="string" const_name="s_fwv" init_value="">Firmware Version</output>
+				<output type="string" const_name="s_sse" init_value="">Seriennummer</output>
+				<output type="number" const_name="n_ace" init_value="0">Energiemenge RFID E</output>
+				<output type="number" const_name="n_ecr" init_value="0">Energiemenge RFID R</output>
+				<output type="number" const_name="n_ecd" init_value="0">Energiemenge RFID D</output>
+				<output type="number" const_name="n_ec4" init_value="0">Energiemenge RFID 4</output>
+				<output type="number" const_name="n_ec5" init_value="0">Energiemenge RFID 5</output>
+				<output type="number" const_name="n_ec6" init_value="0">Energiemenge RFID 6</output>
+				<output type="number" const_name="n_ec7" init_value="0">Energiemenge RFID 7</output>
+				<output type="number" const_name="n_ec8" init_value="0">Energiemenge RFID 8</output>
+				<output type="number" const_name="n_ec9" init_value="0">Energiemenge RFID 9​</output>
+				<output type="number" const_name="n_ec1" init_value="0">Energiemenge RFID 1</output>
+				<output type="number" const_name="n_rca" init_value="0">RFID Karte A ID</output>
+				<output type="number" const_name="n_rcr" init_value="0">RFID Karte R ID</output>
+				<output type="number" const_name="n_rcd" init_value="0">RFID Karte D ID</output>
+				<output type="number" const_name="n_rc4" init_value="0">RFID Karte 4 ID</output>
+				<output type="number" const_name="n_rc5" init_value="0">RFID Karte 5 ID</output>
+				<output type="number" const_name="n_rc6" init_value="0">RFID Karte 6 ID</output>
+				<output type="number" const_name="n_rc7" init_value="0">RFID Karte 7 ID</output>
+				<output type="number" const_name="n_rc8" init_value="0">RFID Karte 8 ID</output>
+				<output type="number" const_name="n_rc9" init_value="0">RFID Karte 9 ID</output>
+				<output type="number" const_name="n_rc1" init_value="0">RFID Karte 1 ID</output>
+
+            	<output type="number" const_name="n_amp" init_value="0">Ampere für PWM Signalisierung</output>
+            	<output type="number" const_name="n_ast" init_value="0">Access State</output>
+            	<output type="number" const_name="n_alw" init_value="0">Allow Charging</output>
+				<output type="number" const_name="n_stp" init_value="0">Stop State</output>
+            	<output type="number" const_name="n_dwo" init_value="0">Abschaltwert</output>
+            	<output type="string" const_name="s_wss" init_value="">WLAN SSID</output>
+            	<output type="string" const_name="s_wke" init_value="">WLAN Key</output>
+            	<output type="number" const_name="n_wen" init_value="0">Wifi Enabled</output>
+            	<output type="number" const_name="n_tof" init_value="0">Time Offset</output>
+            	<output type="number" const_name="n_tds" init_value="0">Daylight saving time offset</output>
+            	<output type="number" const_name="n_lbr" init_value="0">LED Helligkeit</output>
+            	<output type="number" const_name="n_aho" init_value="0">Min. auto Ladezeit [h]</output>
+            	<output type="number" const_name="n_afo" init_value="0">Stoppzeit auto laden [h]</output>
+            	<output type="number" const_name="n_al1" init_value="0">Ampere-Level 1 [A]</output>
+            	<output type="number" const_name="n_al2" init_value="0">Ampere-Level 2 [A]</output>
+            	<output type="number" const_name="n_al3" init_value="0">Ampere-Level 3 [A]</output>
+            	<output type="number" const_name="n_al4" init_value="0">Ampere-Level 4 [A]</output>
+            	<output type="number" const_name="n_al5" init_value="0">Ampere-Level 5 [A]</output>
+            	<output type="number" const_name="n_cid" init_value="0">Farbwert Standby</output>
+            	<output type="number" const_name="n_cch" init_value="0">Farbwert Ladevorgang</output>
+            	<output type="number" const_name="n_cfi" init_value="0">Farbwert Ladevorgang Ende</output>
+            	<output type="number" const_name="n_lse" init_value="0">LED Save Energy</output>
+            	<output type="number" const_name="n_ust" init_value="0">Unlock State</output>
+            	<output type="number" const_name="n_wak" init_value="0">WLAN Hotspot Password</output>
+				<output type="number" const_name="n_r1x" init_value="0">Flags </output>
+            	<output type="number" const_name="n_dto" init_value="0">Restzeit​fenster auto Laden</output>
+            	<output type="number" const_name="n_nmo" init_value="0">Norwegen-Modus​</output>
+            	<output type="number" const_name="n_rna" init_value="0">RFID Karte A Name</output>
+				<output type="number" const_name="n_rnm" init_value="0">RFID Karte N Name</output>
+				<output type="number" const_name="n_rne" init_value="0">RFID Karte E Name</output>
+				<output type="number" const_name="n_rn1" init_value="0">RFID Karte 1 Name</output>
+				<output type="number" const_name="n_rn4" init_value="0">RFID Karte 4 Name</output>
+				<output type="number" const_name="n_rn5" init_value="0">RFID Karte 5 Name</output>
+				<output type="number" const_name="n_rn6" init_value="0">RFID Karte 6 Name</output>
+				<output type="number" const_name="n_rn7" init_value="0">RFID Karte 7 Name</output>
+				<output type="number" const_name="n_rn8" init_value="0">RFID Karte 8 Name</output>
+				<output type="number" const_name="n_rn9" init_value="0">RFID Karte 9 Name</output>
+				<output type="number" const_name="n_azo" init_value="0">Awattar Preiszone</output>
+				<output type="number" const_name="n_ama" init_value="0">Vorgabe max. Ampere</output>
             </outputs>               
 			<remanent_variables>
             </remanent_variables>
@@ -86,5 +128,4 @@
         </module>			
     </modules>
 </config>
-       
                  
