@@ -3,6 +3,9 @@
     <modules>
         <module category="Datenaustausch" context="hsl20_3_json" id="14105" name="go-eCharger (14105)" version="0.1">
             <inputs>
+            	<input type="string" const_name="s_ip" init_value="">IP</input>
+            	<input type="number" const_name="n_port" init_value="80">Port</input>
+                <input type="number" const_name="n_trigger" init_value="0">Trigger</input>				
             	<input type="number" const_name="n_amp" init_value="0">Ampere für PWM Signalisierung</input>
             	<input type="number" const_name="n_ast" init_value="0">Access State</input>
             	<input type="number" const_name="n_alw" init_value="0">Allow Charging</input>
@@ -44,7 +47,7 @@
 				<input type="number" const_name="n_ama" init_value="0">Vorgabe max. Ampere</input>
             </inputs>
             <outputs>
-				<output type="string" const_name="s_out_version" init_value="">Version</output>
+				<output type="string" const_name="s_version" init_value="">Version</output>
 				<output type="number" const_name="n_rbc" init_value="0">Reboot Counter</output>
 				<output type="number" const_name="n_rbt" init_value="0">Reboot Timer</output>
 				<output type="number" const_name="n_car" init_value="0">Status PWM Signalisierung</output>
