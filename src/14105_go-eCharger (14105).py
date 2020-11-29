@@ -1,7 +1,6 @@
 # coding: UTF-8
 import httplib
 import json
-from __builtin__ import set
 
 ##!!!!##################################################################################################
 #### Own written code can be placed above this commentblock . Do not change or delete commentblock! ####
@@ -143,16 +142,18 @@ class Go_eCharger_14105_14105(hsl20_3.BaseModule):
         api_path = '/status'
         data = ""
 
+        print(api_url + " " + api_path)
+
         try:
             httpClient = httplib.HTTPConnection(api_url, int(api_port), timeout=5)
             httpClient.request("GET", api_path)
             response = httpClient.getresponse()
             status = response.status
             data = {'data' : response.read(), 'status' : status}
-            self.DEBUG.add_message("14105: go-eCharger API: " + str(status))
+            self.DEBUG.add_message("14105: http response code: " + str(status))
         except Exception as e:
-            self.DEBUG.add_message(str(e))
-            return
+            self.DEBUG.add_message("14105: " + str(e))
+            return {}
         finally:
             if httpClient:
                 httpClient.close()
@@ -419,54 +420,56 @@ class Go_eCharger_14105_14105(hsl20_3.BaseModule):
 
     def on_init(self):
         self.DEBUG = self.FRAMEWORK.create_debug_section()
-        self.m_index2key = {self.PIN_I_N_AMP: 'amp',
-                     self.PIN_I_N_AST: 'ast',
-                     self.PIN_I_N_ALW: 'alw',
-                     self.PIN_I_N_STP: 'stp',
-                     self.PIN_I_N_DWO: 'dwo',
-                     self.PIN_I_S_WSS: 'wss',
-                     self.PIN_I_S_WKE: 'wke',
-                     self.PIN_I_N_WEN: 'wen',
-                     self.PIN_I_N_TOF: 'tof',
-                     self.PIN_I_N_TDS: 'tds',
-                     self.PIN_I_N_LBR: 'lbr',
-                     self.PIN_I_N_AHO: 'aho',
-                     self.PIN_I_N_AFO: 'afo',
-                     self.PIN_I_N_AL1: 'al1',
-                     self.PIN_I_N_AL2: 'al2',
-                     self.PIN_I_N_AL3: 'al3',
-                     self.PIN_I_N_AL4: 'al4',
-                     self.PIN_I_N_AL5: 'al5',
-                     self.PIN_I_N_CID: 'cid',
-                     self.PIN_I_N_CCH: 'cch',
-                     self.PIN_I_N_CFI: 'cfi',
-                     self.PIN_I_N_LSE: 'lse',
-                     self.PIN_I_N_UST: 'ust',
-                     self.PIN_I_N_WAK: 'wak',
-                     self.PIN_I_N_R1X: 'r1x',
-                     self.PIN_I_N_DTO: 'dto',
-                     self.PIN_I_N_NMO: 'nmo',
-                     self.PIN_I_N_RNA: 'rna',
-                     self.PIN_I_N_RNM: 'rnm',
-                     self.PIN_I_N_RNE: 'rne',
-                     self.PIN_I_N_RN1: 'rn1',
-                     self.PIN_I_N_RN4: 'rn4',
-                     self.PIN_I_N_RN5: 'rn5',
-                     self.PIN_I_N_RN6: 'rn6',
-                     self.PIN_I_N_RN7: 'rn7',
-                     self.PIN_I_N_RN8: 'rn8',
-                     self.PIN_I_N_RN9: 'rn9',
-                     self.PIN_I_N_AZO: 'azo',
-                     self.PIN_I_N_AMA: 'ama'}
+        self.m_index2key = {self.PIN_I_N_AMP: "amp",
+                     self.PIN_I_N_AST: "ast",
+                     self.PIN_I_N_ALW: "alw",
+                     self.PIN_I_N_STP: "stp",
+                     self.PIN_I_N_DWO: "dwo",
+                     self.PIN_I_S_WSS: "wss",
+                     self.PIN_I_S_WKE: "wke",
+                     self.PIN_I_N_WEN: "wen",
+                     self.PIN_I_N_TOF: "tof",
+                     self.PIN_I_N_TDS: "tds",
+                     self.PIN_I_N_LBR: "lbr",
+                     self.PIN_I_N_AHO: "aho",
+                     self.PIN_I_N_AFO: "afo",
+                     self.PIN_I_N_AL1: "al1",
+                     self.PIN_I_N_AL2: "al2",
+                     self.PIN_I_N_AL3: "al3",
+                     self.PIN_I_N_AL4: "al4",
+                     self.PIN_I_N_AL5: "al5",
+                     self.PIN_I_N_CID: "cid",
+                     self.PIN_I_N_CCH: "cch",
+                     self.PIN_I_N_CFI: "cfi",
+                     self.PIN_I_N_LSE: "lse",
+                     self.PIN_I_N_UST: "ust",
+                     self.PIN_I_N_WAK: "wak",
+                     self.PIN_I_N_R1X: "r1x",
+                     self.PIN_I_N_DTO: "dto",
+                     self.PIN_I_N_NMO: "nmo",
+                     self.PIN_I_N_RNA: "rna",
+                     self.PIN_I_N_RNM: "rnm",
+                     self.PIN_I_N_RNE: "rne",
+                     self.PIN_I_N_RN1: "rn1",
+                     self.PIN_I_N_RN4: "rn4",
+                     self.PIN_I_N_RN5: "rn5",
+                     self.PIN_I_N_RN6: "rn6",
+                     self.PIN_I_N_RN7: "rn7",
+                     self.PIN_I_N_RN8: "rn8",
+                     self.PIN_I_N_RN9: "rn9",
+                     self.PIN_I_N_AZO: "azo",
+                     self.PIN_I_N_AMA: "ama"}
 
     def on_input_value(self, index, value):
 
         sUrl = str(self._get_input_value(self.PIN_I_S_IP))
         nPort = int(self._get_input_value(self.PIN_I_N_PORT))
 
-        if (self.PIN_I_N_TRIGGER == index):
+        if ((self.PIN_I_N_TRIGGER == index) and (value != 0)):
             ret = self.getData( sUrl, nPort)
-            readJson(ret['data'])
+            if 'data' in ret:
+                self.readJson(ret['data'])
+            else:
+                self.DEBUG.add_message("14105: Could not receive data")
         else:
             self.httpGet(sUrl, nPort, self.m_index2key(index), str(self._get_input_value(index)))
-
