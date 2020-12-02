@@ -31,8 +31,8 @@
             	<input type="number" const_name="n_ust" init_value="0">Unlock State</input>				
             	<input type="number" const_name="n_wak" init_value="0">WLAN Hotspot Password</input>
 				<input type="number" const_name="n_r1x" init_value="0">Flags </input>
-            	<input type="number" const_name="n_dto" init_value="0">Restzeit​fenster auto Laden</input>
-            	<input type="number" const_name="n_nmo" init_value="0">Norwegen-Modus​</input>
+            	<input type="number" const_name="n_dto" init_value="0">Restzeitfenster auto Laden</input>
+            	<input type="number" const_name="n_nmo" init_value="0">Norwegen-Modus</input>
             	<input type="number" const_name="n_rna" init_value="0">RFID Karte A Name</input>
 				<input type="number" const_name="n_rnm" init_value="0">RFID Karte N Name</input>
 				<input type="number" const_name="n_rne" init_value="0">RFID Karte E Name</input>
@@ -52,9 +52,9 @@
 				<output type="number" const_name="n_rbt" init_value="0">Reboot Timer</output>
 				<output type="number" const_name="n_car" init_value="0">Status PWM Signalisierung</output>
 				<output type="number" const_name="n_rr" init_value="0">Error</output>
-				<output type="number" const_name="n_cbl" init_value="0">Typ2 ​Kabel Ampere Kodierung</output>
+				<output type="number" const_name="n_cbl" init_value="0">Typ2 Kabel Ampere Kodierung</output>
 				<output type="number" const_name="n_pha" init_value="0">Phasen</output>
-				<output type="number" const_name="n_cmp" init_value="0">Temperatur​</output>
+				<output type="number" const_name="n_cmp" init_value="0">Temperatur</output>
 				<output type="number" const_name="n_dws" init_value="0">Geladene Energiemenge</output>
 				<output type="number" const_name="n_adi" init_value="0">Adapter In</output>
 				<output type="number" const_name="n_uby" init_value="0">Unlocked by</output>
@@ -71,7 +71,7 @@
 				<output type="number" const_name="n_ec6" init_value="0">Energiemenge RFID 6</output>
 				<output type="number" const_name="n_ec7" init_value="0">Energiemenge RFID 7</output>
 				<output type="number" const_name="n_ec8" init_value="0">Energiemenge RFID 8</output>
-				<output type="number" const_name="n_ec9" init_value="0">Energiemenge RFID 9​</output>
+				<output type="number" const_name="n_ec9" init_value="0">Energiemenge RFID 9</output>
 				<output type="number" const_name="n_ec1" init_value="0">Energiemenge RFID 1</output>
 				<output type="number" const_name="n_rca" init_value="0">RFID Karte A ID</output>
 				<output type="number" const_name="n_rcr" init_value="0">RFID Karte R ID</output>
@@ -109,8 +109,8 @@
             	<output type="number" const_name="n_ust" init_value="0">Unlock State</output>
             	<output type="number" const_name="n_wak" init_value="0">WLAN Hotspot Password</output>
 				<output type="number" const_name="n_r1x" init_value="0">Flags </output>
-            	<output type="number" const_name="n_dto" init_value="0">Restzeit​fenster auto Laden</output>
-            	<output type="number" const_name="n_nmo" init_value="0">Norwegen-Modus​</output>
+            	<output type="number" const_name="n_dto" init_value="0">Restzeitfenster auto Laden</output>
+            	<output type="number" const_name="n_nmo" init_value="0">Norwegen-Modus</output>
             	<output type="number" const_name="n_rna" init_value="0">RFID Karte A Name</output>
 				<output type="number" const_name="n_rnm" init_value="0">RFID Karte N Name</output>
 				<output type="number" const_name="n_rne" init_value="0">RFID Karte E Name</output>
