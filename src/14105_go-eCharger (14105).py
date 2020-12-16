@@ -10,7 +10,7 @@ import json
 class Go_eCharger_14105_14105(hsl20_3.BaseModule):
 
     def __init__(self, homeserver_context):
-        hsl20_3.BaseModule.__init__(self, homeserver_context, "hsl20_3_json")
+        hsl20_3.BaseModule.__init__(self, homeserver_context, "hsl20_3_go_eCharger")
         self.FRAMEWORK = self._get_framework()
         self.LOGGER = self._get_logger(hsl20_3.LOGGING_NONE,())
         self.PIN_I_S_IP=1
@@ -39,30 +39,30 @@ class Go_eCharger_14105_14105(hsl20_3.BaseModule):
         self.PIN_I_N_CFI=24
         self.PIN_I_N_LSE=25
         self.PIN_I_N_UST=26
-        self.PIN_I_N_WAK=27
+        self.PIN_I_S_WAK=27
         self.PIN_I_N_R1X=28
         self.PIN_I_N_DTO=29
         self.PIN_I_N_NMO=30
-        self.PIN_I_N_RNA=31
-        self.PIN_I_N_RNM=32
-        self.PIN_I_N_RNE=33
-        self.PIN_I_N_RN1=34
-        self.PIN_I_N_RN4=35
-        self.PIN_I_N_RN5=36
-        self.PIN_I_N_RN6=37
-        self.PIN_I_N_RN7=38
-        self.PIN_I_N_RN8=39
-        self.PIN_I_N_RN9=40
+        self.PIN_I_S_RNA=31
+        self.PIN_I_S_RNM=32
+        self.PIN_I_S_RNE=33
+        self.PIN_I_S_RN1=34
+        self.PIN_I_S_RN4=35
+        self.PIN_I_S_RN5=36
+        self.PIN_I_S_RN6=37
+        self.PIN_I_S_RN7=38
+        self.PIN_I_S_RN8=39
+        self.PIN_I_S_RN9=40
         self.PIN_I_N_AZO=41
         self.PIN_I_N_AMA=42
         self.PIN_O_S_VERSION=1
         self.PIN_O_N_RBC=2
         self.PIN_O_N_RBT=3
         self.PIN_O_N_CAR=4
-        self.PIN_O_N_RR=5
+        self.PIN_O_N_ERR=5
         self.PIN_O_N_CBL=6
         self.PIN_O_N_PHA=7
-        self.PIN_O_N_CMP=8
+        self.PIN_O_N_TMP=8
         self.PIN_O_N_DWS=9
         self.PIN_O_N_ADI=10
         self.PIN_O_N_UBY=11
@@ -71,7 +71,7 @@ class Go_eCharger_14105_14105(hsl20_3.BaseModule):
         self.PIN_O_N_NRG=14
         self.PIN_O_S_FWV=15
         self.PIN_O_S_SSE=16
-        self.PIN_O_N_ACE=17
+        self.PIN_O_N_ECA=17
         self.PIN_O_N_ECR=18
         self.PIN_O_N_ECD=19
         self.PIN_O_N_EC4=20
@@ -81,55 +81,56 @@ class Go_eCharger_14105_14105(hsl20_3.BaseModule):
         self.PIN_O_N_EC8=24
         self.PIN_O_N_EC9=25
         self.PIN_O_N_EC1=26
-        self.PIN_O_N_RCA=27
-        self.PIN_O_N_RCR=28
-        self.PIN_O_N_RCD=29
-        self.PIN_O_N_RC4=30
-        self.PIN_O_N_RC5=31
-        self.PIN_O_N_RC6=32
-        self.PIN_O_N_RC7=33
-        self.PIN_O_N_RC8=34
-        self.PIN_O_N_RC9=35
-        self.PIN_O_N_RC1=36
-        self.PIN_O_N_AMP=37
-        self.PIN_O_N_AST=38
-        self.PIN_O_N_ALW=39
-        self.PIN_O_N_STP=40
-        self.PIN_O_N_DWO=41
-        self.PIN_O_S_WSS=42
-        self.PIN_O_S_WKE=43
-        self.PIN_O_N_WEN=44
-        self.PIN_O_N_TOF=45
-        self.PIN_O_N_TDS=46
-        self.PIN_O_N_LBR=47
-        self.PIN_O_N_AHO=48
-        self.PIN_O_N_AFO=49
-        self.PIN_O_N_AL1=50
-        self.PIN_O_N_AL2=51
-        self.PIN_O_N_AL3=52
-        self.PIN_O_N_AL4=53
-        self.PIN_O_N_AL5=54
-        self.PIN_O_N_CID=55
-        self.PIN_O_N_CCH=56
-        self.PIN_O_N_CFI=57
-        self.PIN_O_N_LSE=58
-        self.PIN_O_N_UST=59
-        self.PIN_O_N_WAK=60
-        self.PIN_O_N_R1X=61
-        self.PIN_O_N_DTO=62
-        self.PIN_O_N_NMO=63
-        self.PIN_O_N_RNA=64
-        self.PIN_O_N_RNM=65
-        self.PIN_O_N_RNE=66
-        self.PIN_O_N_RN1=67
-        self.PIN_O_N_RN4=68
-        self.PIN_O_N_RN5=69
-        self.PIN_O_N_RN6=70
-        self.PIN_O_N_RN7=71
-        self.PIN_O_N_RN8=72
-        self.PIN_O_N_RN9=73
-        self.PIN_O_N_AZO=74
-        self.PIN_O_N_AMA=75
+        self.PIN_O_S_RCA=27
+        self.PIN_O_S_RCR=28
+        self.PIN_O_S_RCD=29
+        self.PIN_O_S_RC4=30
+        self.PIN_O_S_RC5=31
+        self.PIN_O_S_RC6=32
+        self.PIN_O_S_RC7=33
+        self.PIN_O_S_RC8=34
+        self.PIN_O_S_RC9=35
+        self.PIN_O_S_RC1=36
+        self.PIN_O_S_TME=37
+        self.PIN_O_N_AMP=38
+        self.PIN_O_N_AST=39
+        self.PIN_O_N_ALW=40
+        self.PIN_O_N_STP=41
+        self.PIN_O_N_DWO=42
+        self.PIN_O_S_WSS=43
+        self.PIN_O_S_WKE=44
+        self.PIN_O_N_WEN=45
+        self.PIN_O_N_TOF=46
+        self.PIN_O_N_TDS=47
+        self.PIN_O_N_LBR=48
+        self.PIN_O_N_AHO=49
+        self.PIN_O_N_AFI=50
+        self.PIN_O_N_AL1=51
+        self.PIN_O_N_AL2=52
+        self.PIN_O_N_AL3=53
+        self.PIN_O_N_AL4=54
+        self.PIN_O_N_AL5=55
+        self.PIN_O_N_CID=56
+        self.PIN_O_N_CCH=57
+        self.PIN_O_N_CFI=58
+        self.PIN_O_N_LSE=59
+        self.PIN_O_N_UST=60
+        self.PIN_O_S_WAK=61
+        self.PIN_O_N_R1X=62
+        self.PIN_O_N_DTO=63
+        self.PIN_O_N_NMO=64
+        self.PIN_O_S_RNA=65
+        self.PIN_O_S_RNM=66
+        self.PIN_O_S_RNE=67
+        self.PIN_O_S_RN1=68
+        self.PIN_O_S_RN4=69
+        self.PIN_O_S_RN5=70
+        self.PIN_O_S_RN6=71
+        self.PIN_O_S_RN7=72
+        self.PIN_O_S_RN8=73
+        self.PIN_O_S_RN9=74
+        self.PIN_O_N_AZO=75
+        self.PIN_O_N_AMA=76
         self.FRAMEWORK._run_in_context_thread(self.on_init)
 
 ########################################################################################################
@@ -207,15 +208,16 @@ class Go_eCharger_14105_14105(hsl20_3.BaseModule):
             if 'wst' in jsonState:
                 nWST = jsonState['wst']
                 self._set_output_value(self.PIN_O_N_WST, int(nWST))
-            if 'nrg' in jsonState:
-                nNRG = jsonState['nrg']
-                self._set_output_value(self.PIN_O_N_ERG, int(nNRG))
+            # @todo nrg is array of 15 elements, to be processed
+            #if 'nrg' in jsonState:
+            #    nNRG = jsonState['nrg']
+            #    self._set_output_value(self.PIN_O_N_NRG, int(nNRG))
             if 'fwv' in jsonState:
-                nFWV = jsonState['fwv']
-                self._set_output_value(self.PIN_O_N_FWV, int(nFWV))
+                sFWV = jsonState['fwv']
+                self._set_output_value(self.PIN_O_S_FWV, str(sFWV))
             if 'sse' in jsonState:
-                nSSE = jsonState['sse']
-                self._set_output_value(self.PIN_O_N_SSE, int(nSSE))
+                sSSE = jsonState['sse']
+                self._set_output_value(self.PIN_O_S_SSE, int(sSSE))
             if 'eca' in jsonState:
                 nECA = jsonState['eca']
                 self._set_output_value(self.PIN_O_N_ECA, int(nECA))
@@ -276,6 +278,9 @@ class Go_eCharger_14105_14105(hsl20_3.BaseModule):
             if 'rc1' in jsonState:
                 sRC1 = jsonState['rc1']
                 self._set_output_value(self.PIN_O_S_RC1, str(sRC1))
+            if 'tme' in jsonState:
+                sTME = jsonState['tme']
+                self._set_output_value(self.PIN_O_S_TME, str(sTME))
             if 'amp' in jsonState:
                 nAMP = jsonState['amp']
                 self._set_output_value(self.PIN_O_N_AMP, int(nAMP))
@@ -362,37 +367,38 @@ class Go_eCharger_14105_14105(hsl20_3.BaseModule):
                 self._set_output_value(self.PIN_O_N_NMO, str(nNMO))
             if 'rna' in jsonState:
                 nRNA = jsonState['rna']
-                self._set_output_value(self.PIN_O_N_RNA, str(nRNA))
+                self._set_output_value(self.PIN_O_S_RNA, str(nRNA))
             if 'rnm' in jsonState:
                 nRNM = jsonState['rnm']
-                self._set_output_value(self.PIN_O_N_RNM, str(nRNM))
+                self._set_output_value(self.PIN_O_S_RNM, str(nRNM))
             if 'rne' in jsonState:
                 nRNE = jsonState['rne']
-                self._set_output_value(self.PIN_O_N_RNE, str(nRNE))
+                self._set_output_value(self.PIN_O_S_RNE, str(nRNE))
             if 'rn4' in jsonState:
                 nRN4 = jsonState['rn4']
-                self._set_output_value(self.PIN_O_N_RN4, str(nRN4))
+                self._set_output_value(self.PIN_O_S_RN4, str(nRN4))
             if 'rn5' in jsonState:
                 nRN5 = jsonState['rn5']
-                self._set_output_value(self.PIN_O_N_RN5, str(nRN5))
+                self._set_output_value(self.PIN_O_S_RN5, str(nRN5))
             if 'rn6' in jsonState:
                 nRN6 = jsonState['rn6']
-                self._set_output_value(self.PIN_O_N_RN6, str(nRN6))
+                self._set_output_value(self.PIN_O_S_RN6, str(nRN6))
             if 'rn7' in jsonState:
                 nRN7 = jsonState['rn7']
-                self._set_output_value(self.PIN_O_N_RN7, str(nRN7))
+                self._set_output_value(self.PIN_O_S_RN7, str(nRN7))
             if 'rn8' in jsonState:
-                nRN7 = jsonState['rn8']
-                self._set_output_value(self.PIN_O_N_RN8, str(nRN8))
+                nRN8 = jsonState['rn8']
+                self._set_output_value(self.PIN_O_S_RN8, str(nRN8))
             if 'rn9' in jsonState:
                 nRN9 = jsonState['rn9']
-                self._set_output_value(self.PIN_O_N_RN9, str(nRN9))
+                self._set_output_value(self.PIN_O_S_RN9, str(nRN9))
             if 'rn1' in jsonState:
                 nRN1 = jsonState['rn1']
-                self._set_output_value(self.PIN_O_N_RN1, str(nRN1))
+                self._set_output_value(self.PIN_O_S_RN1, str(nRN1))
 
-        except:
+        except Exception as e :
             jsonState = []
+            self.DEBUG.add_message("14105 in 'readJson': " + str(e))
 
         return json.dumps(jsonState)
 
@@ -409,9 +415,10 @@ class Go_eCharger_14105_14105(hsl20_3.BaseModule):
             response = httpClient.getresponse()
             status = response.status
             data = {'data' : response.read(), 'status' : status}
+            self.readJson(data['data'])
             return data
-        #except Exception as e:
-        except:
+        except Exception as e:
+            self.DEBUG.add_message("14105 in 'httpGet': " + str(e))
             return data
         finally:
             if httpClient:
@@ -420,45 +427,45 @@ class Go_eCharger_14105_14105(hsl20_3.BaseModule):
 
     def on_init(self):
         self.DEBUG = self.FRAMEWORK.create_debug_section()
-        self.m_index2key = {self.PIN_I_N_AMP : "amp",
-                     self.PIN_I_N_AST : "ast",
-                     self.PIN_I_N_ALW : "alw",
-                     self.PIN_I_N_STP : "stp",
-                     self.PIN_I_N_DWO : "dwo",
-                     self.PIN_I_S_WSS : "wss",
-                     self.PIN_I_S_WKE : "wke",
-                     self.PIN_I_N_WEN : "wen",
-                     self.PIN_I_N_TOF : "tof",
-                     self.PIN_I_N_TDS : "tds",
-                     self.PIN_I_N_LBR : "lbr",
-                     self.PIN_I_N_AHO : "aho",
-                     self.PIN_I_N_AFO : "afo",
-                     self.PIN_I_N_AL1 : "al1",
-                     self.PIN_I_N_AL2 : "al2",
-                     self.PIN_I_N_AL3 : "al3",
-                     self.PIN_I_N_AL4 : "al4",
-                     self.PIN_I_N_AL5 : "al5",
-                     self.PIN_I_N_CID : "cid",
-                     self.PIN_I_N_CCH : "cch",
-                     self.PIN_I_N_CFI : "cfi",
-                     self.PIN_I_N_LSE : "lse",
-                     self.PIN_I_N_UST : "ust",
-                     self.PIN_I_N_WAK : "wak",
-                     self.PIN_I_N_R1X : "r1x",
-                     self.PIN_I_N_DTO : "dto",
-                     self.PIN_I_N_NMO : "nmo",
-                     self.PIN_I_N_RNA : "rna",
-                     self.PIN_I_N_RNM : "rnm",
-                     self.PIN_I_N_RNE : "rne",
-                     self.PIN_I_N_RN1 : "rn1",
-                     self.PIN_I_N_RN4 : "rn4",
-                     self.PIN_I_N_RN5 : "rn5",
-                     self.PIN_I_N_RN6 : "rn6",
-                     self.PIN_I_N_RN7 : "rn7",
-                     self.PIN_I_N_RN8 : "rn8",
-                     self.PIN_I_N_RN9 : "rn9",
-                     self.PIN_I_N_AZO : "azo",
-                     self.PIN_I_N_AMA : "ama"}
+        self.m_index2key = {str(self.PIN_I_N_AMP): 'amp',
+                     str(self.PIN_I_N_AST): 'ast',
+                     str(self.PIN_I_N_ALW): 'alw',
+                     str(self.PIN_I_N_STP): 'stp',
+                     str(self.PIN_I_N_DWO): 'dwo',
+                     str(self.PIN_I_S_WSS): 'wss',
+                     str(self.PIN_I_S_WKE): 'wke',
+                     str(self.PIN_I_N_WEN): 'wen',
+                     str(self.PIN_I_N_TOF): 'tof',
+                     str(self.PIN_I_N_TDS): 'tds',
+                     str(self.PIN_I_N_LBR): 'lbr',
+                     str(self.PIN_I_N_AHO): 'aho',
+                     str(self.PIN_I_N_AFO): 'afo',
+                     str(self.PIN_I_N_AL1): 'al1',
+                     str(self.PIN_I_N_AL2): 'al2',
+                     str(self.PIN_I_N_AL3): 'al3',
+                     str(self.PIN_I_N_AL4): 'al4',
+                     str(self.PIN_I_N_AL5): 'al5',
+                     str(self.PIN_I_N_CID): 'cid',
+                     str(self.PIN_I_N_CCH): 'cch',
+                     str(self.PIN_I_N_CFI): 'cfi',
+                     str(self.PIN_I_N_LSE): 'lse',
+                     str(self.PIN_I_N_UST): 'ust',
+                     str(self.PIN_I_S_WAK): 'wak',
+                     str(self.PIN_I_N_R1X): 'r1x',
+                     str(self.PIN_I_N_DTO): 'dto',
+                     str(self.PIN_I_N_NMO): 'nmo',
+                     str(self.PIN_I_S_RNA): 'rna',
+                     str(self.PIN_I_S_RNM): 'rnm',
+                     str(self.PIN_I_S_RNE): 'rne',
+                     str(self.PIN_I_S_RN1): 'rn1',
+                     str(self.PIN_I_S_RN4): 'rn4',
+                     str(self.PIN_I_S_RN5): 'rn5',
+                     str(self.PIN_I_S_RN6): 'rn6',
+                     str(self.PIN_I_S_RN7): 'rn7',
+                     str(self.PIN_I_S_RN8): 'rn8',
+                     str(self.PIN_I_S_RN9): 'rn9',
+                     str(self.PIN_I_N_AZO): 'azo',
+                     str(self.PIN_I_N_AMA): 'ama'}
 
     def on_input_value(self, index, value):
 
@@ -472,4 +479,5 @@ class Go_eCharger_14105_14105(hsl20_3.BaseModule):
             else:
                 self.DEBUG.add_message("14105: Could not receive data")
         else:
-            self.httpGet(sUrl, nPort, self.m_index2key(index), str(self._get_input_value(index)))
+            if str(index) in self.m_index2key:
+                self.httpGet(sUrl, nPort, self.m_index2key[str(index)], str(value))
