@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
     <modules>
-        <module category="Datenaustausch" context="hsl20_3_go-eCharger" id="14105" name="go-eCharger (14105)" version="0.3">
+        <module category="Datenaustausch" context="hsl20_3_go-eCharger" id="14105" name="go-eCharger (14105)" version="0.4">
             <inputs>
             	<input type="string" const_name="s_ip" init_value="">IP</input>
             	<input type="number" const_name="n_port" init_value="80">Port</input>
+                <input type="number" const_name="n_interval" init_value="0">Intervall [s]</input>
                 <input type="number" const_name="n_trigger" init_value="0">Trigger</input>				
             	<input type="number" const_name="n_amp" init_value="0">amp / Ampere für PWM [6-32A]</input>
             	<input type="number" const_name="n_ast" init_value="0">ast / Access State</input>
             	<input type="number" const_name="n_alw" init_value="0">alw / Allow Charging</input>
 				<input type="number" const_name="n_stp" init_value="0">stp / Stop State</input>
-            	<input type="number" const_name="n_dwo" init_value="0">dwo / Abschaltwert</input>
+            	<input type="number" const_name="n_dwo" init_value="0">dwo / Abschaltwert [kWh]</input>
             	<input type="string" const_name="s_wss" init_value="">wss / WLAN SSID</input>
             	<input type="string" const_name="s_wke" init_value="">wke / WLAN Key</input>
             	<input type="number" const_name="n_wen" init_value="0">wen / Wifi Enabled</input>
             	<input type="number" const_name="n_tof" init_value="0">tof / Time Offset</input>
             	<input type="number" const_name="n_tds" init_value="0">tds / Daylight saving time offset</input>
-            	<input type="number" const_name="n_lbr" init_value="0">lbr / LED Helligkeit</input>
+            	<input type="number" const_name="n_lbr" init_value="0">lbr / LED Helligkeit [%]</input>
             	<input type="number" const_name="n_aho" init_value="0">aho / Min. auto Ladezeit [h]</input>
             	<input type="number" const_name="n_afo" init_value="0">afo / Stoppzeit auto laden [h]</input>
             	<input type="number" const_name="n_al1" init_value="0">al1 / Ampere-Level 1</input>
@@ -49,30 +50,30 @@
             <outputs>
 				<output type="string" const_name="s_version" init_value="">Version</output>
 				<output type="number" const_name="n_rbc" init_value="0">rbc / Reboot Counter</output>
-				<output type="number" const_name="n_rbt" init_value="0">rbt / Reboot Timer</output>
+				<output type="number" const_name="n_rbt" init_value="0">rbt / Reboot Timer [s]</output>
 				<output type="number" const_name="n_car" init_value="0">car / Status PWM Signalisierung</output>
 				<output type="number" const_name="n_err" init_value="0">err / Error</output>
 				<output type="number" const_name="n_cbl" init_value="0">cbl / Type2 Kabel A Kodierung</output>
 				<output type="number" const_name="n_pha" init_value="0">Pha / Phasen</output>
 				<output type="number" const_name="n_tmp" init_value="0">tmp / Temperatur</output>
-				<output type="number" const_name="n_dws" init_value="0">dws / Geladene Energiemenge</output>
+				<output type="number" const_name="n_dws" init_value="0">dws / Geladene Energiemenge [kWh]</output>
 				<output type="number" const_name="n_adi" init_value="0">adi / Adapter In</output>
 				<output type="number" const_name="n_uby" init_value="0">uby / Unlocked by</output>
-				<output type="number" const_name="n_eto" init_value="0">eto / Energy Total</output>
+				<output type="number" const_name="n_eto" init_value="0">eto / Energy Total [kWh]</output>
 				<output type="number" const_name="n_wst" init_value="0">wst / Wifi State</output>
 				<output type="number" const_name="n_nrg" init_value="0">nrg</output>
 				<output type="string" const_name="s_fwv" init_value="">fwv / Firmware Version</output>
 				<output type="string" const_name="s_sse" init_value="">sse / Seriennummer</output>
-				<output type="number" const_name="n_eca" init_value="0">eca / Energiemenge RFID E</output>
-				<output type="number" const_name="n_ecr" init_value="0">ecr / Energiemenge RFID R</output>
-				<output type="number" const_name="n_ecd" init_value="0">ecd / Energiemenge RFID D</output>
-				<output type="number" const_name="n_ec4" init_value="0">ec4 / Energiemenge RFID 4</output>
-				<output type="number" const_name="n_ec5" init_value="0">ec5 / Energiemenge RFID 5</output>
-				<output type="number" const_name="n_ec6" init_value="0">ec6 / Energiemenge RFID 6</output>
-				<output type="number" const_name="n_ec7" init_value="0">ec7 / Energiemenge RFID 7</output>
-				<output type="number" const_name="n_ec8" init_value="0">ec8 / Energiemenge RFID 8</output>
-				<output type="number" const_name="n_ec9" init_value="0">ec9 / Energiemenge RFID 9</output>
-				<output type="number" const_name="n_ec1" init_value="0">ec1 / Energiemenge RFID 1</output>
+				<output type="number" const_name="n_eca" init_value="0">eca / Energiemenge RFID E [kWh]</output>
+				<output type="number" const_name="n_ecr" init_value="0">ecr / Energiemenge RFID R [kWh]</output>
+				<output type="number" const_name="n_ecd" init_value="0">ecd / Energiemenge RFID D [kWh]</output>
+				<output type="number" const_name="n_ec4" init_value="0">ec4 / Energiemenge RFID 4 [kWh]</output>
+				<output type="number" const_name="n_ec5" init_value="0">ec5 / Energiemenge RFID 5 [kWh]</output>
+				<output type="number" const_name="n_ec6" init_value="0">ec6 / Energiemenge RFID 6 [kWh]</output>
+				<output type="number" const_name="n_ec7" init_value="0">ec7 / Energiemenge RFID 7 [kWh]</output>
+				<output type="number" const_name="n_ec8" init_value="0">ec8 / Energiemenge RFID 8 [kWh]</output>
+				<output type="number" const_name="n_ec9" init_value="0">ec9 / Energiemenge RFID 9 [kWh]</output>
+				<output type="number" const_name="n_ec1" init_value="0">ec1 / Energiemenge RFID 1 [kWh]</output>
 				<output type="string" const_name="s_rca" init_value="">rca / RFID Karte A ID</output>
 				<output type="string" const_name="s_rcr" init_value="">rcr / RFID Karte R ID</output>
 				<output type="string" const_name="s_rcd" init_value="">rcd / RFID Karte D ID</output>
@@ -83,18 +84,18 @@
 				<output type="string" const_name="s_rc8" init_value="">rc8 / RFID Karte 8 ID</output>
 				<output type="string" const_name="s_rc9" init_value="">rc9 / RFID Karte 9 ID</output>
 				<output type="string" const_name="s_rc1" init_value="">rc1 / RFID Karte 1 ID</output>
-				<output type="string" const_name="s_tme" init_value="">tme / Time</output>				
+				<output type="string" const_name="s_tme" init_value="">tme / Time [dd.mm.yyyy hh:mm]</output>				
             	<output type="number" const_name="n_amp" init_value="0">amp / Ampere für PWM Signalisierung</output>
             	<output type="number" const_name="n_ast" init_value="0">ast / Access State</output>
             	<output type="number" const_name="n_alw" init_value="0">alw / Allow Charging</output>
 				<output type="number" const_name="n_stp" init_value="0">stp / Stop State</output>
-            	<output type="number" const_name="n_dwo" init_value="0">dwo / Abschaltwert</output>
+            	<output type="number" const_name="n_dwo" init_value="0">dwo / Abschaltwert [kWh]</output>
             	<output type="string" const_name="s_wss" init_value="">wss / WLAN SSID</output>
             	<output type="string" const_name="s_wke" init_value="">wke / WLAN Key</output>
             	<output type="number" const_name="n_wen" init_value="0">wen / Wifi Enabled</output>
             	<output type="number" const_name="n_tof" init_value="0">tof / Time Offset</output>
             	<output type="number" const_name="n_tds" init_value="0">tds / Daylight saving time offset</output>
-            	<output type="number" const_name="n_lbr" init_value="0">lbr / LED Helligkeit</output>
+            	<output type="number" const_name="n_lbr" init_value="0">lbr / LED Helligkeit [%]</output>
             	<output type="number" const_name="n_aho" init_value="0">aho / Min. auto Ladezeit [h]</output>
             	<output type="number" const_name="n_afi" init_value="0">afi / Stoppzeit auto laden [h]</output>
             	<output type="number" const_name="n_al1" init_value="0">al1 / Ampere-Level 1 [A]</output>
