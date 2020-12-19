@@ -124,6 +124,7 @@
 				<output type="string" const_name="s_rn9" init_value="">rn9 / RFID Karte 9 Name</output>
 				<output type="number" const_name="n_azo" init_value="0">azo / Awattar Preiszone</output>
 				<output type="number" const_name="n_ama" init_value="0">ama / Vorgabe max. Ampere</output>
+				<output type="number" const_name="n_upd" init_value="0">upd / Update verfügbar</output>
             </outputs>
 			<remanent_variables>
             </remanent_variables>

@@ -133,6 +133,7 @@ class Go_eCharger_14105_14105(hsl20_3.BaseModule):
         self.PIN_O_S_RN9=74
         self.PIN_O_N_AZO=75
         self.PIN_O_N_AMA=76
+        self.PIN_O_N_UPD=77
         self.FRAMEWORK._run_in_context_thread(self.on_init)
 
 ########################################################################################################
@@ -182,7 +183,7 @@ class Go_eCharger_14105_14105(hsl20_3.BaseModule):
                 nRBC = jsonState['rbc']
                 self._set_output_value(self.PIN_O_N_RBC, int(nRBC))
             if 'rbt' in jsonState:
-                nRBT = jsonState['rbt'] / 1000
+                nRBT = int(jsonState['rbt']) / 1000
                 self._set_output_value(self.PIN_O_N_RBT, int(nRBT))
             if 'car' in jsonState:
                 nCar = jsonState['car']
@@ -203,7 +204,7 @@ class Go_eCharger_14105_14105(hsl20_3.BaseModule):
                 nTMP = jsonState['tmp']
                 self._set_output_value(self.PIN_O_N_TMP, int(nTMP))
             if 'dws' in jsonState:
-                nDWS = jsonState['dws'] / 360000.0
+                nDWS = int(jsonState['dws']) / 360000.0
                 self._set_output_value(self.PIN_O_N_DWS, float(nDWS))
             if 'adi' in jsonState:
                 nADI = jsonState['adi']
@@ -212,7 +213,7 @@ class Go_eCharger_14105_14105(hsl20_3.BaseModule):
                 nUBY = jsonState['uby']
                 self._set_output_value(self.PIN_O_N_UBY, int(nUBY))
             if 'eto' in jsonState:
-                nETO = jsonState['eto'] / 10.0
+                nETO = int(jsonState['eto']) / 10.0
                 self._set_output_value(self.PIN_O_N_ETO, float(nETO))
             if 'wst' in jsonState:
                 nWST = jsonState['wst']
@@ -228,34 +229,34 @@ class Go_eCharger_14105_14105(hsl20_3.BaseModule):
                 sSSE = jsonState['sse']
                 self._set_output_value(self.PIN_O_S_SSE, int(sSSE))
             if 'eca' in jsonState:
-                nECA = jsonState['eca'] / 10.0
+                nECA = int(jsonState['eca']) / 10.0
                 self._set_output_value(self.PIN_O_N_ECA, float(nECA))
             if 'ecr' in jsonState:
-                nECR = jsonState['ecr'] / 10.0
+                nECR = int(jsonState['ecr']) / 10.0
                 self._set_output_value(self.PIN_O_N_ECR, float(nECR))
             if 'ecd' in jsonState:
-                nECD = jsonState['ecd'] / 10.0
+                nECD = int(jsonState['ecd']) / 10.0
                 self._set_output_value(self.PIN_O_N_ECD, float(nECD))
             if 'ec4' in jsonState:
-                nEC4 = jsonState['ec4'] / 10.0
+                nEC4 = int(jsonState['ec4']) / 10.0
                 self._set_output_value(self.PIN_O_N_EC4, float(nEC4))
             if 'ec5' in jsonState:
-                nEC5 = jsonState['ec5'] / 10.0
+                nEC5 = int(jsonState['ec5']) / 10.0
                 self._set_output_value(self.PIN_O_N_EC5, float(nEC5))
             if 'ec6' in jsonState:
-                nEC6 = jsonState['ec6'] / 10.0
+                nEC6 = int(jsonState['ec6']) / 10.0
                 self._set_output_value(self.PIN_O_N_EC6, float(nEC6))
             if 'ec7' in jsonState:
-                nEC7 = jsonState['ec7'] / 10.0
+                nEC7 = int(jsonState['ec7']) / 10.0
                 self._set_output_value(self.PIN_O_N_EC7, float(nEC7))
             if 'ec8' in jsonState:
-                nEC8 = jsonState['ec8'] / 10.0
+                nEC8 = int(jsonState['ec8']) / 10.0
                 self._set_output_value(self.PIN_O_N_EC8, float(nEC8))
             if 'ec9' in jsonState:
-                nEC9 = jsonState['ec9'] / 10.0
+                nEC9 = int(jsonState['ec9']) / 10.0
                 self._set_output_value(self.PIN_O_N_EC9, float(nEC9))
             if 'ec1' in jsonState:
-                nEC1 = jsonState['ec1'] / 10.0
+                nEC1 = int(jsonState['ec1']) / 10.0
                 self._set_output_value(self.PIN_O_N_EC1, float(nEC1))
             if 'rca' in jsonState:
                 sRCA = jsonState['rca']
@@ -306,7 +307,7 @@ class Go_eCharger_14105_14105(hsl20_3.BaseModule):
                 nSTP = jsonState['stp']
                 self._set_output_value(self.PIN_O_N_STP, int(nSTP))
             if 'dwo' in jsonState:
-                nDWO = jsonState['dwo'] / 10.0
+                nDWO = int(jsonState['dwo']) / 10.0
                 self._set_output_value(self.PIN_O_N_DWO, float(nDWO))
             if 'wss' in jsonState:
                 sWSS = jsonState['wss']
@@ -324,7 +325,7 @@ class Go_eCharger_14105_14105(hsl20_3.BaseModule):
                 nTDS = jsonState['tds']
                 self._set_output_value(self.PIN_O_N_TDS, str(nTDS))
             if 'lbr' in jsonState:
-                nLBR = jsonState['lbr'] / 255.0 * 100
+                nLBR = int(jsonState['lbr']) / 255.0 * 100
                 self._set_output_value(self.PIN_O_N_LBR, int(nLBR))
             if 'aho' in jsonState:
                 nAHO = jsonState['aho']
@@ -407,7 +408,9 @@ class Go_eCharger_14105_14105(hsl20_3.BaseModule):
             if 'rn1' in jsonState:
                 nRN1 = jsonState['rn1']
                 self._set_output_value(self.PIN_O_S_RN1, str(nRN1))
-
+            if 'upd' in jsonState:
+                nUPD = jsonState['upd']
+                self._set_output_value(self.PIN_O_S_RN1, int(nUPD))
         except Exception as e :
             jsonState = []
             self.DEBUG.add_message("14105 in 'readJson': " + str(e))
@@ -489,6 +492,8 @@ class Go_eCharger_14105_14105(hsl20_3.BaseModule):
 
         else:
             if str(index) in self.m_index2key:
+                sUrl = str(self._get_input_value(self.PIN_I_S_IP))
+                nPort = int(self._get_input_value(self.PIN_I_N_PORT))
                 sKey = self.m_index2key[str(index)]
                 if (sKey == "lbr"):
                     self.httpGet(sUrl, nPort, sKey, str(int(value) * 255 / 100))
