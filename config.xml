@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
     <modules>
-        <module category="Datenaustausch" context="hsl20_3_go-eCharger" id="14105" name="go-eCharger (14105)" version="0.4">
+        <module category="Datenaustausch" context="hsl20_3_go-eCharger" id="14105" name="go-eCharger (14105)" version="0.5">
             <inputs>
             	<input type="string" const_name="s_ip" init_value="">IP</input>
             	<input type="number" const_name="n_port" init_value="80">Port</input>
@@ -48,6 +48,7 @@
 				<input type="number" const_name="n_ama" init_value="0">ama / Vorgabe max. Ampere</input>
             </inputs>
             <outputs>
+				<output type="number" const_name="n_online" init_value="0">Online</output>
 				<output type="string" const_name="s_version" init_value="">Version</output>
 				<output type="number" const_name="n_rbc" init_value="0">rbc / Reboot Counter</output>
 				<output type="number" const_name="n_rbt" init_value="0">rbt / Reboot Timer [s]</output>
