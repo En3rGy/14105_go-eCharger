@@ -71,7 +71,7 @@ class Go_eCharger_14105_14105(hsl20_3.BaseModule):
         self.PIN_O_N_UBY=12
         self.PIN_O_N_ETO=13
         self.PIN_O_N_WST=14
-        self.PIN_O_N_NRG=15
+        self.PIN_O_N_NRG_CURR=15
         self.PIN_O_S_FWV=16
         self.PIN_O_S_SSE=17
         self.PIN_O_N_ECA=18
