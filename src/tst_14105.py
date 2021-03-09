@@ -1,145 +1,209 @@
 # coding: UTF-8
+
+import unittest
+
+
 import httplib
 import json
 import threading
 
-##!!!!##################################################################################################
-#### Own written code can be placed above this commentblock . Do not change or delete commentblock! ####
-########################################################################################################
-##** Code created by generator - DO NOT CHANGE! **##
+
+class hsl20_3:
+    LOGGING_NONE = 0
+
+    def __init__(self):
+        pass
+
+    class BaseModule:
+        debug_gain = 1.0  # type: float
+        debug_offset = 0.0  # type: float
+        debug_set_output_value = {}
+        debug_input_value = {}
+        debug_set_remanent = {}
+
+        def __init__(self, a, b):
+            pass
+
+        def _get_framework(self):
+            f = hsl20_3.Framework()
+            return f
+
+        def _get_logger(self, a, b):
+            return 0
+
+        def _get_remanent(self, key):
+            return self.debug_set_remanent[key]
+
+        def _set_remanent(self, key, val):
+            self.debug_set_remanent[key] = val
+
+        def _set_output_value(self, pin, value):
+            self.debug_set_output_value[pin] = value
+
+        def _get_input_value(self, pin):
+            if pin in self.debug_input_value:
+                return self.debug_input_value[pin]
+            else:
+                return 0
+
+    class Framework:
+        def __init__(self):
+            pass
+
+        def _run_in_context_thread(self, a):
+            pass
+
+        def create_debug_section(self):
+            d = hsl20_3.DebugHelper()
+            return d
+
+    class DebugHelper:
+        def __init__(self):
+            pass
+
+        def set_value(self, cap, text):
+            print ("DEBUG value\t'" + str(cap) + "': " + str(text))
+
+        def add_message(self, msg):
+            print ("Debug Msg\t" + str(msg))
+
+
+################################################
+################################################
 
 class Go_eCharger_14105_14105(hsl20_3.BaseModule):
 
     def __init__(self, homeserver_context):
         hsl20_3.BaseModule.__init__(self, homeserver_context, "hsl20_3_go_eCharger")
         self.FRAMEWORK = self._get_framework()
-        self.LOGGER = self._get_logger(hsl20_3.LOGGING_NONE,())
-        self.PIN_I_S_IP=1
-        self.PIN_I_N_PORT=2
-        self.PIN_I_N_INTERVAL=3
-        self.PIN_I_N_TRIGGER=4
-        self.PIN_I_N_AMP=5
-        self.PIN_I_N_AST=6
-        self.PIN_I_N_ALW=7
-        self.PIN_I_N_STP=8
-        self.PIN_I_N_DWO=9
-        self.PIN_I_S_WSS=10
-        self.PIN_I_S_WKE=11
-        self.PIN_I_N_WEN=12
-        self.PIN_I_N_TOF=13
-        self.PIN_I_N_TDS=14
-        self.PIN_I_N_LBR=15
-        self.PIN_I_N_AHO=16
-        self.PIN_I_N_AFO=17
-        self.PIN_I_N_AL1=18
-        self.PIN_I_N_AL2=19
-        self.PIN_I_N_AL3=20
-        self.PIN_I_N_AL4=21
-        self.PIN_I_N_AL5=22
-        self.PIN_I_N_CID=23
-        self.PIN_I_N_CCH=24
-        self.PIN_I_N_CFI=25
-        self.PIN_I_N_LSE=26
-        self.PIN_I_N_UST=27
-        self.PIN_I_S_WAK=28
-        self.PIN_I_N_R1X=29
-        self.PIN_I_N_DTO=30
-        self.PIN_I_N_NMO=31
-        self.PIN_I_S_RNA=32
-        self.PIN_I_S_RNM=33
-        self.PIN_I_S_RNE=34
-        self.PIN_I_S_RN1=35
-        self.PIN_I_S_RN4=36
-        self.PIN_I_S_RN5=37
-        self.PIN_I_S_RN6=38
-        self.PIN_I_S_RN7=39
-        self.PIN_I_S_RN8=40
-        self.PIN_I_S_RN9=41
-        self.PIN_I_N_AZO=42
-        self.PIN_I_N_AMA=43
-        self.PIN_O_N_ONLINE=1
-        self.PIN_O_S_VERSION=2
-        self.PIN_O_N_RBC=3
-        self.PIN_O_N_RBT=4
-        self.PIN_O_N_CAR=5
-        self.PIN_O_N_ERR=6
-        self.PIN_O_N_CBL=7
-        self.PIN_O_N_PHA=8
-        self.PIN_O_N_TMP=9
-        self.PIN_O_N_DWS=10
-        self.PIN_O_N_ADI=11
-        self.PIN_O_N_UBY=12
-        self.PIN_O_N_ETO=13
-        self.PIN_O_N_WST=14
-        self.PIN_O_N_NRG_CURR=15
-        self.PIN_O_S_FWV=16
-        self.PIN_O_S_SSE=17
-        self.PIN_O_N_ECA=18
-        self.PIN_O_N_ECR=19
-        self.PIN_O_N_ECD=20
-        self.PIN_O_N_EC4=21
-        self.PIN_O_N_EC5=22
-        self.PIN_O_N_EC6=23
-        self.PIN_O_N_EC7=24
-        self.PIN_O_N_EC8=25
-        self.PIN_O_N_EC9=26
-        self.PIN_O_N_EC1=27
-        self.PIN_O_S_RCA=28
-        self.PIN_O_S_RCR=29
-        self.PIN_O_S_RCD=30
-        self.PIN_O_S_RC4=31
-        self.PIN_O_S_RC5=32
-        self.PIN_O_S_RC6=33
-        self.PIN_O_S_RC7=34
-        self.PIN_O_S_RC8=35
-        self.PIN_O_S_RC9=36
-        self.PIN_O_S_RC1=37
-        self.PIN_O_S_TME=38
-        self.PIN_O_N_AMP=39
-        self.PIN_O_N_AST=40
-        self.PIN_O_N_ALW=41
-        self.PIN_O_N_STP=42
-        self.PIN_O_N_DWO=43
-        self.PIN_O_S_WSS=44
-        self.PIN_O_S_WKE=45
-        self.PIN_O_N_WEN=46
-        self.PIN_O_N_TOF=47
-        self.PIN_O_N_TDS=48
-        self.PIN_O_N_LBR=49
-        self.PIN_O_N_AHO=50
-        self.PIN_O_N_AFI=51
-        self.PIN_O_N_AL1=52
-        self.PIN_O_N_AL2=53
-        self.PIN_O_N_AL3=54
-        self.PIN_O_N_AL4=55
-        self.PIN_O_N_AL5=56
-        self.PIN_O_N_CID=57
-        self.PIN_O_N_CCH=58
-        self.PIN_O_N_CFI=59
-        self.PIN_O_N_LSE=60
-        self.PIN_O_N_UST=61
-        self.PIN_O_S_WAK=62
-        self.PIN_O_N_R1X=63
-        self.PIN_O_N_DTO=64
-        self.PIN_O_N_NMO=65
-        self.PIN_O_S_RNA=66
-        self.PIN_O_S_RNM=67
-        self.PIN_O_S_RNE=68
-        self.PIN_O_S_RN1=69
-        self.PIN_O_S_RN4=70
-        self.PIN_O_S_RN5=71
-        self.PIN_O_S_RN6=72
-        self.PIN_O_S_RN7=73
-        self.PIN_O_S_RN8=74
-        self.PIN_O_S_RN9=75
-        self.PIN_O_N_AZO=76
-        self.PIN_O_N_AMA=77
-        self.PIN_O_N_UPD=78
+        self.LOGGER = self._get_logger(hsl20_3.LOGGING_NONE, ())
+        self.PIN_I_S_IP = 1
+        self.PIN_I_N_PORT = 2
+        self.PIN_I_N_INTERVAL = 3
+        self.PIN_I_N_TRIGGER = 4
+        self.PIN_I_N_AMP = 5
+        self.PIN_I_N_AST = 6
+        self.PIN_I_N_ALW = 7
+        self.PIN_I_N_STP = 8
+        self.PIN_I_N_DWO = 9
+        self.PIN_I_S_WSS = 10
+        self.PIN_I_S_WKE = 11
+        self.PIN_I_N_WEN = 12
+        self.PIN_I_N_TOF = 13
+        self.PIN_I_N_TDS = 14
+        self.PIN_I_N_LBR = 15
+        self.PIN_I_N_AHO = 16
+        self.PIN_I_N_AFO = 17
+        self.PIN_I_N_AL1 = 18
+        self.PIN_I_N_AL2 = 19
+        self.PIN_I_N_AL3 = 20
+        self.PIN_I_N_AL4 = 21
+        self.PIN_I_N_AL5 = 22
+        self.PIN_I_N_CID = 23
+        self.PIN_I_N_CCH = 24
+        self.PIN_I_N_CFI = 25
+        self.PIN_I_N_LSE = 26
+        self.PIN_I_N_UST = 27
+        self.PIN_I_S_WAK = 28
+        self.PIN_I_N_R1X = 29
+        self.PIN_I_N_DTO = 30
+        self.PIN_I_N_NMO = 31
+        self.PIN_I_S_RNA = 32
+        self.PIN_I_S_RNM = 33
+        self.PIN_I_S_RNE = 34
+        self.PIN_I_S_RN1 = 35
+        self.PIN_I_S_RN4 = 36
+        self.PIN_I_S_RN5 = 37
+        self.PIN_I_S_RN6 = 38
+        self.PIN_I_S_RN7 = 39
+        self.PIN_I_S_RN8 = 40
+        self.PIN_I_S_RN9 = 41
+        self.PIN_I_N_AZO = 42
+        self.PIN_I_N_AMA = 43
+        self.PIN_O_N_ONLINE = 1
+        self.PIN_O_S_VERSION = 2
+        self.PIN_O_N_RBC = 3
+        self.PIN_O_N_RBT = 4
+        self.PIN_O_N_CAR = 5
+        self.PIN_O_N_ERR = 6
+        self.PIN_O_N_CBL = 7
+        self.PIN_O_N_PHA = 8
+        self.PIN_O_N_TMP = 9
+        self.PIN_O_N_DWS = 10
+        self.PIN_O_N_ADI = 11
+        self.PIN_O_N_UBY = 12
+        self.PIN_O_N_ETO = 13
+        self.PIN_O_N_WST = 14
+        self.PIN_O_N_NRG = 15
+        self.PIN_O_N_NRG_CURR = 16
+        self.PIN_O_S_FWV = 17
+        self.PIN_O_S_SSE = 18
+        self.PIN_O_N_ECA = 19
+        self.PIN_O_N_ECR = 20
+        self.PIN_O_N_ECD = 21
+        self.PIN_O_N_EC4 = 22
+        self.PIN_O_N_EC5 = 23
+        self.PIN_O_N_EC6 = 24
+        self.PIN_O_N_EC7 = 25
+        self.PIN_O_N_EC8 = 26
+        self.PIN_O_N_EC9 = 27
+        self.PIN_O_N_EC1 = 28
+        self.PIN_O_S_RCA = 29
+        self.PIN_O_S_RCR = 30
+        self.PIN_O_S_RCD = 31
+        self.PIN_O_S_RC4 = 32
+        self.PIN_O_S_RC5 = 33
+        self.PIN_O_S_RC6 = 34
+        self.PIN_O_S_RC7 = 35
+        self.PIN_O_S_RC8 = 36
+        self.PIN_O_S_RC9 = 37
+        self.PIN_O_S_RC1 = 38
+        self.PIN_O_S_TME = 39
+        self.PIN_O_N_AMP = 40
+        self.PIN_O_N_AST = 41
+        self.PIN_O_N_ALW = 42
+        self.PIN_O_N_STP = 43
+        self.PIN_O_N_DWO = 44
+        self.PIN_O_S_WSS = 45
+        self.PIN_O_S_WKE = 46
+        self.PIN_O_N_WEN = 47
+        self.PIN_O_N_TOF = 48
+        self.PIN_O_N_TDS = 49
+        self.PIN_O_N_LBR = 50
+        self.PIN_O_N_AHO = 51
+        self.PIN_O_N_AFI = 52
+        self.PIN_O_N_AL1 = 53
+        self.PIN_O_N_AL2 = 54
+        self.PIN_O_N_AL3 = 55
+        self.PIN_O_N_AL4 = 56
+        self.PIN_O_N_AL5 = 57
+        self.PIN_O_N_CID = 58
+        self.PIN_O_N_CCH = 59
+        self.PIN_O_N_CFI = 60
+        self.PIN_O_N_LSE = 61
+        self.PIN_O_N_UST = 62
+        self.PIN_O_S_WAK = 63
+        self.PIN_O_N_R1X = 64
+        self.PIN_O_N_DTO = 65
+        self.PIN_O_N_NMO = 66
+        self.PIN_O_S_RNA = 67
+        self.PIN_O_S_RNM = 68
+        self.PIN_O_S_RNE = 69
+        self.PIN_O_S_RN1 = 70
+        self.PIN_O_S_RN4 = 71
+        self.PIN_O_S_RN5 = 72
+        self.PIN_O_S_RN6 = 73
+        self.PIN_O_S_RN7 = 74
+        self.PIN_O_S_RN8 = 75
+        self.PIN_O_S_RN9 = 76
+        self.PIN_O_N_AZO = 77
+        self.PIN_O_N_AMA = 78
+        self.PIN_O_N_UPD = 79
         self.FRAMEWORK._run_in_context_thread(self.on_init)
 
-########################################################################################################
-#### Own written code can be placed after this commentblock . Do not change or delete commentblock! ####
-###################################################################################################!!!##
+    ########################################################################################################
+    #### Own written code can be placed after this commentblock . Do not change or delete commentblock! ####
+    ###################################################################################################!!!##
 
     m_index2key = {}
 
@@ -522,3 +586,40 @@ class Go_eCharger_14105_14105(hsl20_3.BaseModule):
                     self.http_get(s_url, n_port, s_key, str(float(value) * 10))
                 else:
                     self.http_get(s_url, n_port, s_key, str(value))
+
+
+################################################
+################################################
+
+
+class RequirementsVerification(unittest.TestCase):
+
+    cred = 0
+    tst = 0
+
+    def setUp(self):
+        print("\n###setUp")
+        with open("credentials.txt") as f:
+            self.cred = json.load(f)
+
+        self.tst = Go_eCharger_14105_14105(0)
+        self.tst.on_init()
+
+        self.tst.debug_input_value[self.tst.PIN_I_S_IP] = self.cred["PIN_I_S_IP"]
+        self.tst.debug_input_value[self.tst.PIN_I_N_PORT] = self.cred["PIN_I_N_PORT"]
+
+    def test_trigger(self):
+        print("\n###test_trigger")
+        self.tst.on_init()
+        self.tst.on_input_value(self.tst.PIN_I_N_TRIGGER, 1)
+        self.assertTrue(True)
+
+    def test_tme(self):
+        print("\n###test_tme")
+        self.tst.on_init()
+        js = '{"tme":"0104191236"}'
+        self.tst.read_json(js)
+        self.assertTrue("01.04.2019 12:36", self.tst.debug_set_output_value[self.tst.PIN_O_S_TME])
+
+if __name__ == '__main__':
+    unittest.main()
