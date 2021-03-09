@@ -156,14 +156,14 @@ class Go_eCharger_14105_14105(hsl20_3.BaseModule):
             httpClient.request("GET", api_path)
             response = httpClient.getresponse()
             status = response.status
-            data = {'data' : response.read(), 'status' : status}
+            data = {'data': response.read(), 'status': status}
             self.DEBUG.add_message("14105: http response code: " + str(status))
         except Exception as e:
             self.DEBUG.add_message("14105: " + str(e))
         finally:
             if httpClient:
                 httpClient.close()
-                
+
         if 'data' in data:
             self.readJson(data['data'])
             self._set_output_value(self.PIN_O_N_ONLINE, 1)
@@ -222,10 +222,27 @@ class Go_eCharger_14105_14105(hsl20_3.BaseModule):
             if 'wst' in jsonState:
                 nWST = jsonState['wst']
                 self._set_output_value(self.PIN_O_N_WST, int(nWST))
-            # @todo nrg is array of 15 elements, to be processed
-            #if 'nrg' in jsonState:
-            #    nNRG = jsonState['nrg']
-            #    self._set_output_value(self.PIN_O_N_NRG, int(nNRG))
+
+            # nrg[0]: Spannung auf L1 in volts
+            # nrg[1]: Spannung auf L2 in volts
+            # nrg[2]: Spannung auf L3 in volts
+            # nrg[3]: Spannung auf N in volts
+            # nrg[4]: Ampere auf L1 in 0.1 A(123 entspricht 12.3 A)
+            # nrg[5]: Ampere auf L2 in 0.1 A
+            # nrg[6]: Ampere auf L3 in 0.1 A
+            # nrg[7]: Leistung auf L1 in 0.1 kW(36 entspricht 3.6 kW)
+            # nrg[8]: Leistung auf L2 in 0.1 kW
+            # nrg[9]: Leistung auf L3 in 0.1 kW
+            # nrg[10]: Leistung auf N in 0.1 kW
+            # nrg[11]: Leistung gesamt 0.01 kW(360 entspricht 3.6 kW)
+            # nrg[12]: Leistungsfaktor auf L1 in %
+            # nrg[13]: Leistungsfaktor auf L2 in %
+            # nrg[14]: Leistungsfaktor auf L3 in %
+            # nrg[15]: Leistungsfaktor auf N in %
+            if 'nrg' in jsonState:
+                nrg = jsonState['nrg']
+                nrg_curr = (int(nrg[4]) + int(nrg[5]) + int(nrg[6])) / 10
+                self._set_output_value(self.PIN_O_N_NRG_CURR, nrg_curr)
             if 'fwv' in jsonState:
                 sFWV = jsonState['fwv']
                 self._set_output_value(self.PIN_O_S_FWV, str(sFWV))
@@ -295,7 +312,7 @@ class Go_eCharger_14105_14105(hsl20_3.BaseModule):
             if 'tme' in jsonState:
                 sTME = jsonState['tme']
                 # ddmmyyhhmi -> dd.mm.yyyy hh:mi
-                if (len(sTME) == 9):
+                if (len(sTME) == 10):
                     sTME = sTME[0:1] + '.' + sTME[2:3] + sTME[4:5] + ' ' + sTME[6:7] + ":" + sTME[8:9]
                 self._set_output_value(self.PIN_O_S_TME, str(sTME))
             if 'amp' in jsonState:
@@ -415,25 +432,24 @@ class Go_eCharger_14105_14105(hsl20_3.BaseModule):
             if 'upd' in jsonState:
                 nUPD = jsonState['upd']
                 self._set_output_value(self.PIN_O_S_RN1, int(nUPD))
-        except Exception as e :
+        except Exception as e:
             jsonState = []
             self.DEBUG.add_message("14105 in 'readJson': " + str(e))
 
         return json.dumps(jsonState)
 
-
     def httpGet(self, api_url, api_port, key, val):
         httpClient = None
-        data = {'data' : "", 'status' : -1}
+        data = {'data': "", 'status': -1}
         try:
             api_path = '/mqtt?payload=' + str(key) + '=' + str(val)
-            #headers = { "HOST": str(api_url + ":" + str(api_port)), "CONTENT-LENGTH": str(0), "Content-type": 'application/json' }
+            # headers = { "HOST": str(api_url + ":" + str(api_port)), "CONTENT-LENGTH": str(0), "Content-type": 'application/json' }
             httpClient = httplib.HTTPConnection(api_url, int(api_port), timeout=5)
 
-            httpClient.request("GET", api_path) 
+            httpClient.request("GET", api_path)
             response = httpClient.getresponse()
             status = response.status
-            data = {'data' : response.read(), 'status' : status}
+            data = {'data': response.read(), 'status': status}
             self.readJson(data['data'])
             return data
         except Exception as e:
@@ -443,48 +459,48 @@ class Go_eCharger_14105_14105(hsl20_3.BaseModule):
             if httpClient:
                 httpClient.close()
 
-
     def on_init(self):
         self.DEBUG = self.FRAMEWORK.create_debug_section()
+        self.m_index2key = {}
         self.m_index2key = {str(self.PIN_I_N_AMP): 'amp',
-                     str(self.PIN_I_N_AST): 'ast',
-                     str(self.PIN_I_N_ALW): 'alw',
-                     str(self.PIN_I_N_STP): 'stp',
-                     str(self.PIN_I_N_DWO): 'dwo',
-                     str(self.PIN_I_S_WSS): 'wss',
-                     str(self.PIN_I_S_WKE): 'wke',
-                     str(self.PIN_I_N_WEN): 'wen',
-                     str(self.PIN_I_N_TOF): 'tof',
-                     str(self.PIN_I_N_TDS): 'tds',
-                     str(self.PIN_I_N_LBR): 'lbr',
-                     str(self.PIN_I_N_AHO): 'aho',
-                     str(self.PIN_I_N_AFO): 'afo',
-                     str(self.PIN_I_N_AL1): 'al1',
-                     str(self.PIN_I_N_AL2): 'al2',
-                     str(self.PIN_I_N_AL3): 'al3',
-                     str(self.PIN_I_N_AL4): 'al4',
-                     str(self.PIN_I_N_AL5): 'al5',
-                     str(self.PIN_I_N_CID): 'cid',
-                     str(self.PIN_I_N_CCH): 'cch',
-                     str(self.PIN_I_N_CFI): 'cfi',
-                     str(self.PIN_I_N_LSE): 'lse',
-                     str(self.PIN_I_N_UST): 'ust',
-                     str(self.PIN_I_S_WAK): 'wak',
-                     str(self.PIN_I_N_R1X): 'r1x',
-                     str(self.PIN_I_N_DTO): 'dto',
-                     str(self.PIN_I_N_NMO): 'nmo',
-                     str(self.PIN_I_S_RNA): 'rna',
-                     str(self.PIN_I_S_RNM): 'rnm',
-                     str(self.PIN_I_S_RNE): 'rne',
-                     str(self.PIN_I_S_RN1): 'rn1',
-                     str(self.PIN_I_S_RN4): 'rn4',
-                     str(self.PIN_I_S_RN5): 'rn5',
-                     str(self.PIN_I_S_RN6): 'rn6',
-                     str(self.PIN_I_S_RN7): 'rn7',
-                     str(self.PIN_I_S_RN8): 'rn8',
-                     str(self.PIN_I_S_RN9): 'rn9',
-                     str(self.PIN_I_N_AZO): 'azo',
-                     str(self.PIN_I_N_AMA): 'ama'}
+                            str(self.PIN_I_N_AST): 'ast',
+                            str(self.PIN_I_N_ALW): 'alw',
+                            str(self.PIN_I_N_STP): 'stp',
+                            str(self.PIN_I_N_DWO): 'dwo',
+                            str(self.PIN_I_S_WSS): 'wss',
+                            str(self.PIN_I_S_WKE): 'wke',
+                            str(self.PIN_I_N_WEN): 'wen',
+                            str(self.PIN_I_N_TOF): 'tof',
+                            str(self.PIN_I_N_TDS): 'tds',
+                            str(self.PIN_I_N_LBR): 'lbr',
+                            str(self.PIN_I_N_AHO): 'aho',
+                            str(self.PIN_I_N_AFO): 'afo',
+                            str(self.PIN_I_N_AL1): 'al1',
+                            str(self.PIN_I_N_AL2): 'al2',
+                            str(self.PIN_I_N_AL3): 'al3',
+                            str(self.PIN_I_N_AL4): 'al4',
+                            str(self.PIN_I_N_AL5): 'al5',
+                            str(self.PIN_I_N_CID): 'cid',
+                            str(self.PIN_I_N_CCH): 'cch',
+                            str(self.PIN_I_N_CFI): 'cfi',
+                            str(self.PIN_I_N_LSE): 'lse',
+                            str(self.PIN_I_N_UST): 'ust',
+                            str(self.PIN_I_S_WAK): 'wak',
+                            str(self.PIN_I_N_R1X): 'r1x',
+                            str(self.PIN_I_N_DTO): 'dto',
+                            str(self.PIN_I_N_NMO): 'nmo',
+                            str(self.PIN_I_S_RNA): 'rna',
+                            str(self.PIN_I_S_RNM): 'rnm',
+                            str(self.PIN_I_S_RNE): 'rne',
+                            str(self.PIN_I_S_RN1): 'rn1',
+                            str(self.PIN_I_S_RN4): 'rn4',
+                            str(self.PIN_I_S_RN5): 'rn5',
+                            str(self.PIN_I_S_RN6): 'rn6',
+                            str(self.PIN_I_S_RN7): 'rn7',
+                            str(self.PIN_I_S_RN8): 'rn8',
+                            str(self.PIN_I_S_RN9): 'rn9',
+                            str(self.PIN_I_N_AZO): 'azo',
+                            str(self.PIN_I_N_AMA): 'ama'}
 
         nInterval = self._get_input_value(self.PIN_I_N_INTERVAL)
         if (nInterval > 0):
