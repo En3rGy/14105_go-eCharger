@@ -37,6 +37,8 @@ Der Baustein dient zur Kommunikation mit einer [go-e](https://go-e.co/) Ladestat
 
 ### Change Log
 
+ - v0.6
+     - Refactoring
  - v0.5
      - Fix: Ausgang TME liefert Zeit unformatiert
 	 - Ausgang aktueller Stromfluss auf L1+L2+L3 ergänzt
