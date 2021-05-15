@@ -8,12 +8,12 @@ import threading
 ########################################################################################################
 ##** Code created by generator - DO NOT CHANGE! **##
 
-class Go_eCharger_14105_14105(hsl20_3.BaseModule):
+class Go_eCharger_14105_14105(hsl20_4.BaseModule):
 
     def __init__(self, homeserver_context):
-        hsl20_3.BaseModule.__init__(self, homeserver_context, "hsl20_3_go_eCharger")
+        hsl20_4.BaseModule.__init__(self, homeserver_context, "hsl20_3_go_eCharger")
         self.FRAMEWORK = self._get_framework()
-        self.LOGGER = self._get_logger(hsl20_3.LOGGING_NONE,())
+        self.LOGGER = self._get_logger(hsl20_4.LOGGING_NONE,())
         self.PIN_I_S_IP=1
         self.PIN_I_N_PORT=2
         self.PIN_I_N_INTERVAL=3
@@ -57,6 +57,7 @@ class Go_eCharger_14105_14105(hsl20_3.BaseModule):
         self.PIN_I_S_RN9=41
         self.PIN_I_N_AZO=42
         self.PIN_I_N_AMA=43
+        self.PIN_I_AMX=44
         self.PIN_O_N_ONLINE=1
         self.PIN_O_S_VERSION=2
         self.PIN_O_N_RBC=3
@@ -135,7 +136,7 @@ class Go_eCharger_14105_14105(hsl20_3.BaseModule):
         self.PIN_O_N_AZO=76
         self.PIN_O_N_AMA=77
         self.PIN_O_N_UPD=78
-        self.FRAMEWORK._run_in_context_thread(self.on_init)
+        self.PIN_O_AMX=79
 
 ########################################################################################################
 #### Own written code can be placed after this commentblock . Do not change or delete commentblock! ####
@@ -222,6 +223,9 @@ class Go_eCharger_14105_14105(hsl20_3.BaseModule):
             if 'wst' in json_state:
                 n_wst = json_state['wst']
                 self._set_output_value(self.PIN_O_N_WST, int(n_wst))
+            if 'amx' in json_state:
+                amx = json_state['amx']
+                self._set_output_value(self.PIN_O_AMX, int(amx))
 
             # nrg[0]: Spannung auf L1 in volts
             # nrg[1]: Spannung auf L2 in volts
@@ -501,7 +505,8 @@ class Go_eCharger_14105_14105(hsl20_3.BaseModule):
                             str(self.PIN_I_S_RN8): 'rn8',
                             str(self.PIN_I_S_RN9): 'rn9',
                             str(self.PIN_I_N_AZO): 'azo',
-                            str(self.PIN_I_N_AMA): 'ama'}
+                            str(self.PIN_I_N_AMA): 'ama',
+                            str(self.PIN_I_AMX): 'amx'}
 
         n_interval = self._get_input_value(self.PIN_I_N_INTERVAL)
         if n_interval > 0:

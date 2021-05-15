@@ -46,6 +46,7 @@
 				<input type="string" const_name="s_rn9" init_value="">rn9 / RFID Karte 9 Name</input>
 				<input type="number" const_name="n_azo" init_value="0">azo / Awattar Preiszone</input>
 				<input type="number" const_name="n_ama" init_value="0">ama / Vorgabe max. Ampere</input>
+				<input type="number" const_name="amx" init_value="0">amx / Ampere für PV-Regelung</input>
             </inputs>
             <outputs>
 				<output type="number" const_name="n_online" init_value="0">Online</output>
@@ -126,6 +127,7 @@
 				<output type="number" const_name="n_azo" init_value="0">azo / Awattar Preiszone</output>
 				<output type="number" const_name="n_ama" init_value="0">ama / Vorgabe max. Ampere</output>
 				<output type="number" const_name="n_upd" init_value="0">upd / Update verfügbar</output>
+				<output type="number" const_name="amx" init_value="0">amx / Ampere für PV-Regelung</output>
             </outputs>
 			<remanent_variables>
             </remanent_variables>
