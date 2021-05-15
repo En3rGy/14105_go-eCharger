@@ -64,6 +64,7 @@
 				<output type="number" const_name="n_eto" init_value="0">eto / Energy Total [kWh]</output>
 				<output type="number" const_name="n_wst" init_value="0">wst / Wifi State</output>
 				<output type="number" const_name="n_nrg_curr" init_value="0">nrg / L1+L2+L3 Strom</output>
+				<output type="string" const_name="nrg_json" init_value="">nrg / Json</output>
 				<output type="string" const_name="s_fwv" init_value="">fwv / Firmware Version</output>
 				<output type="string" const_name="s_sse" init_value="">sse / Seriennummer</output>
 				<output type="number" const_name="n_eca" init_value="0">eca / Energiemenge RFID E [kWh]</output>

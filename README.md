@@ -20,6 +20,7 @@ Der Baustein dient zur Kommunikation mit einer [go-e](https://go-e.co/) Ladestat
 | --- | --- | --- | --- |
 | 1 | Online 1 | 0 | 1, wenn Wallbox erreichbar; 0, wenn nicht |
 | 2ff | ... | ... | Für die weiteren Parameter, s. [go-eCharger API](https://github.com/goecharger/go-eCharger-API-v1). *Von der API abweichende Einheiten sind am jew. Ein- Ausgang des Bausteins angegeben.* |
+| | nrg / Json | | Werte des Strom und Spannungssensor als Json Array, z.B. "{'V N': 1, 'P% L2': 0, 'P% L3': 0, 'P% L1': 0, 'V L2': 220, 'V L3': 219, 'kW L1': 0.0, 'V L1': 218, 'kW N': 0.0, 'P% N': 0, 'kW L3': 0.0, 'kW Sum': 0.0, 'kW L2': 0.0, 'A L3': 0.0, 'A L2': 0.0, 'A L1': 0.0}"
 
 ## Beispielwerte
 
