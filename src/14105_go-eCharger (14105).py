@@ -248,9 +248,12 @@ class Go_eCharger_14105_14105(hsl20_4.BaseModule):
                 nrg = json_state['nrg']
                 nrg_curr = (int(nrg[4]) + int(nrg[5]) + int(nrg[6])) / 10
                 self._set_output_value(self.PIN_O_N_NRG_CURR, nrg_curr)
-                nrg_json = {"V L1": nrg[0], "V L2": nrg[1], "V L3": nrg[2], "V N": nrg[3], "A L1": nrg[4] / 10.0, "A L2": nrg[5] / 10.0,
-                            "A L3": nrg[6] / 10.0, "kW L1": nrg[7] / 10.0, "kW L2": nrg[8] / 10.0, "kW L3": nrg[9] / 10.0, "kW N": nrg[10] / 10.0,
-                            "kW Sum": nrg[11] / 100.0, "P% L1": nrg[12], "P% L2": nrg[13], "P% L3": nrg[14], "P% N": nrg[15]}
+                nrg_json_currvolt = {"V L1": nrg[0], "V L2": nrg[1], "V L3": nrg[2], "V N": nrg[3], "A L1": nrg[4] / 10.0, "A L2": nrg[5] / 10.0,"A L3": nrg[6] / 10.0}
+                self._set_output_value(self.PIN_O_NRG_JSON_CURRVOLT, json.dumps(nrg_json_currvolt))
+                nrg_json_power = {"kW L1": nrg[7] / 10.0, "kW L2": nrg[8] / 10.0, "kW L3": nrg[9] / 10.0, "kW N": nrg[10] / 10.0,"kW Sum": nrg[11] / 100.0}
+                self._set_output_value(self.PIN_O_NRG_JSON_POWER, json.dumps(nrg_json_power))
+                nrg_json_powerfactor = {"P% L1": nrg[12], "P% L2": nrg[13], "P% L3": nrg[14], "P% N": nrg[15]}
+                self._set_output_value(self.PIN_O_NRG_JSON_POWERFACTOR, json.dumps(nrg_json_powerfactor))
             if 'fwv' in json_state:
                 s_fwv = json_state['fwv']
                 self._set_output_value(self.PIN_O_S_FWV, str(s_fwv))
