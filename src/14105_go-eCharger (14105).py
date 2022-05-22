@@ -146,15 +146,16 @@ class Go_eCharger_14105_14105(hsl20_4.BaseModule):
     m_index2key = {}
 
     def get_data(self):
+        self.debug_get_data = True
         api_url = str(self._get_input_value(self.PIN_I_S_IP))
         api_port = int(self._get_input_value(self.PIN_I_N_PORT))
         n_interval = self._get_input_value(self.PIN_I_N_INTERVAL)
 
         api_path = '/status'
         data = {}
+        http_client = httplib.HTTPConnection(api_url, int(api_port), timeout=5)
 
         try:
-            http_client = httplib.HTTPConnection(api_url, int(api_port), timeout=5)
             http_client.request("GET", api_path)
             response = http_client.getresponse()
             status = response.status
@@ -169,13 +170,15 @@ class Go_eCharger_14105_14105(hsl20_4.BaseModule):
         if 'data' in data:
             self.read_json(data['data'])
             self._set_output_value(self.PIN_O_N_ONLINE, 1)
-
         else:
             self.DEBUG.add_message("14105: Could not receive data")
             self._set_output_value(self.PIN_O_N_ONLINE, 0)
 
         if n_interval > 0:
-            t = threading.Timer(n_interval, self.get_data).start()
+            if self.t:
+                if self.t.is_alive():
+                    self.t.cancel()
+            self.t = threading.Timer(n_interval, self.get_data).start()
 
     # read light data from json
     def read_json(self, json_state):
@@ -232,25 +235,33 @@ class Go_eCharger_14105_14105(hsl20_4.BaseModule):
             # nrg[1]: Spannung auf L2 in volts
             # nrg[2]: Spannung auf L3 in volts
             # nrg[3]: Spannung auf N in volts
-            # nrg[4]: Ampere auf L1 in 0.1 A(123 entspricht 12.3 A)
+            # nrg[4]: Ampere auf L1 in 0.1 A (123 entspricht 12.3 A)
             # nrg[5]: Ampere auf L2 in 0.1 A
             # nrg[6]: Ampere auf L3 in 0.1 A
-            # nrg[7]: Leistung auf L1 in 0.1 kW(36 entspricht 3.6 kW)
+            # nrg[7]: Leistung auf L1 in 0.1 kW (36 entspricht 3.6 kW)
             # nrg[8]: Leistung auf L2 in 0.1 kW
             # nrg[9]: Leistung auf L3 in 0.1 kW
             # nrg[10]: Leistung auf N in 0.1 kW
-            # nrg[11]: Leistung gesamt 0.01 kW(360 entspricht 3.6 kW)
+            # nrg[11]: Leistung gesamt 0.01 kW (360 entspricht 3.6 kW)
             # nrg[12]: Leistungsfaktor auf L1 in %
             # nrg[13]: Leistungsfaktor auf L2 in %
             # nrg[14]: Leistungsfaktor auf L3 in %
             # nrg[15]: Leistungsfaktor auf N in %
             if 'nrg' in json_state:
                 nrg = json_state['nrg']
-                nrg_curr = (int(nrg[4]) + int(nrg[5]) + int(nrg[6])) / 10
+                nrg_curr = (int(nrg[4]) + int(nrg[5]) + int(nrg[6])) / 10.0
                 self._set_output_value(self.PIN_O_N_NRG_CURR, nrg_curr)
-                nrg_json = {"V L1": nrg[0], "V L2": nrg[1], "V L3": nrg[2], "V N": nrg[3], "A L1": nrg[4] / 10.0, "A L2": nrg[5] / 10.0,
-                            "A L3": nrg[6] / 10.0, "kW L1": nrg[7] / 10.0, "kW L2": nrg[8] / 10.0, "kW L3": nrg[9] / 10.0, "kW N": nrg[10] / 10.0,
-                            "kW Sum": nrg[11] / 100.0, "P% L1": nrg[12], "P% L2": nrg[13], "P% L3": nrg[14], "P% N": nrg[15]}
+                try:
+                    nrg_json = {"V L1": nrg[0], "V L2": nrg[1], "V L3": nrg[2], "V N": nrg[3],
+                                "A L1": nrg[4] / 10.0, "A L2": nrg[5] / 10.0,
+                                "A L3": nrg[6] / 10.0, "kW L1": nrg[7] / 10.0,
+                                "kW L2": nrg[8] / 10.0, "kW L3": nrg[9] / 10.0, "kW N": nrg[10] / 10.0,
+                                "kW Sum": nrg[11] / 100.0,
+                                "P% L1": nrg[12], "P% L2": nrg[13], "P% L3": nrg[14], "P% N": nrg[15]}
+                    self._set_output_value(self.PIN_O_NRG_JSON, nrg_json)
+                except Exception as e:
+                    self.DEBUG.add_message("Error while compiling nrg_json " + str(e))
+
             if 'fwv' in json_state:
                 s_fwv = json_state['fwv']
                 self._set_output_value(self.PIN_O_S_FWV, str(s_fwv))
@@ -513,12 +524,21 @@ class Go_eCharger_14105_14105(hsl20_4.BaseModule):
                             str(self.PIN_I_AMX): 'amx'}
 
         n_interval = self._get_input_value(self.PIN_I_N_INTERVAL)
+        self.t = threading.Timer(n_interval, self.get_data)  # type: threading.Timer
+
         if n_interval > 0:
             self.get_data()
 
     def on_input_value(self, index, value):
         if (self.PIN_I_N_TRIGGER == index) and (value != 0):
             self.get_data()
+
+        elif index == self.PIN_I_N_INTERVAL:
+            if self.t:
+                if self.t.is_alive():
+                    self.t.cancel()
+            if value > 0:
+                self.get_data()
 
         else:
             if str(index) in self.m_index2key:
