@@ -145,6 +145,16 @@ class Go_eCharger_14105_14105(hsl20_4.BaseModule):
 
     m_index2key = {}
 
+    def set_output_value_sbc(self, pin, val):
+        # type:  (int, any) -> None
+        if pin in self.g_out_sbc:
+            if self.g_out_sbc[pin] == val:
+                print ("# SBC: pin " + str(pin) + " <- data not send / " + str(val).decode("utf-8"))
+                return
+
+        self._set_output_value(pin, val)
+        self.g_out_sbc[pin] = val
+
     def get_data(self):
         self.debug_get_data = True
         api_url = str(self._get_input_value(self.PIN_I_S_IP))
@@ -169,10 +179,10 @@ class Go_eCharger_14105_14105(hsl20_4.BaseModule):
 
         if 'data' in data:
             self.read_json(data['data'])
-            self._set_output_value(self.PIN_O_N_ONLINE, 1)
+            self.set_output_value_sbc(self.PIN_O_N_ONLINE, 1)
         else:
             self.DEBUG.add_message("14105: Could not receive data")
-            self._set_output_value(self.PIN_O_N_ONLINE, 0)
+            self.set_output_value_sbc(self.PIN_O_N_ONLINE, 0)
 
         if n_interval > 0:
             if self.t:
@@ -187,49 +197,49 @@ class Go_eCharger_14105_14105(hsl20_4.BaseModule):
 
             if 'version' in json_state:
                 s_ver = json_state['version']
-                self._set_output_value(self.PIN_O_S_VERSION, str(s_ver))
+                self.set_output_value_sbc(self.PIN_O_S_VERSION, str(s_ver))
             if 'rbc' in json_state:
                 n_rbc = json_state['rbc']
-                self._set_output_value(self.PIN_O_N_RBC, int(n_rbc))
+                self.set_output_value_sbc(self.PIN_O_N_RBC, int(n_rbc))
             if 'rbt' in json_state:
                 n_rbt = int(json_state['rbt']) / 1000
-                self._set_output_value(self.PIN_O_N_RBT, int(n_rbt))
+                self.set_output_value_sbc(self.PIN_O_N_RBT, int(n_rbt))
             if 'car' in json_state:
                 n_car = json_state['car']
-                self._set_output_value(self.PIN_O_N_CAR, int(n_car))
+                self.set_output_value_sbc(self.PIN_O_N_CAR, int(n_car))
             if 'car' in json_state:
                 n_car = json_state['car']
-                self._set_output_value(self.PIN_O_N_CAR, int(n_car))
+                self.set_output_value_sbc(self.PIN_O_N_CAR, int(n_car))
             if 'err' in json_state:
                 n_err = json_state['err']
-                self._set_output_value(self.PIN_O_N_ERR, int(n_err))
+                self.set_output_value_sbc(self.PIN_O_N_ERR, int(n_err))
             if 'cbl' in json_state:
                 n_cbl = json_state['cbl']
-                self._set_output_value(self.PIN_O_N_CBL, int(n_cbl))
+                self.set_output_value_sbc(self.PIN_O_N_CBL, int(n_cbl))
             if 'pha' in json_state:
                 n_pha = json_state['pha']
-                self._set_output_value(self.PIN_O_N_PHA, int(n_pha))
+                self.set_output_value_sbc(self.PIN_O_N_PHA, int(n_pha))
             if 'tmp' in json_state:
                 n_tmp = json_state['tmp']
-                self._set_output_value(self.PIN_O_N_TMP, int(n_tmp))
+                self.set_output_value_sbc(self.PIN_O_N_TMP, int(n_tmp))
             if 'dws' in json_state:
                 n_dws = int(json_state['dws']) / 360000.0
-                self._set_output_value(self.PIN_O_N_DWS, float(n_dws))
+                self.set_output_value_sbc(self.PIN_O_N_DWS, float(n_dws))
             if 'adi' in json_state:
                 n_adi = json_state['adi']
-                self._set_output_value(self.PIN_O_N_ADI, int(n_adi))
+                self.set_output_value_sbc(self.PIN_O_N_ADI, int(n_adi))
             if 'uby' in json_state:
                 n_uby = json_state['uby']
-                self._set_output_value(self.PIN_O_N_UBY, int(n_uby))
+                self.set_output_value_sbc(self.PIN_O_N_UBY, int(n_uby))
             if 'eto' in json_state:
                 n_eto = int(json_state['eto']) / 10.0
-                self._set_output_value(self.PIN_O_N_ETO, float(n_eto))
+                self.set_output_value_sbc(self.PIN_O_N_ETO, float(n_eto))
             if 'wst' in json_state:
                 n_wst = json_state['wst']
-                self._set_output_value(self.PIN_O_N_WST, int(n_wst))
+                self.set_output_value_sbc(self.PIN_O_N_WST, int(n_wst))
             if 'amx' in json_state:
                 amx = json_state['amx']
-                self._set_output_value(self.PIN_O_AMX, int(amx))
+                self.set_output_value_sbc(self.PIN_O_AMX, int(amx))
 
             # nrg[0]: Spannung auf L1 in volts
             # nrg[1]: Spannung auf L2 in volts
@@ -250,7 +260,7 @@ class Go_eCharger_14105_14105(hsl20_4.BaseModule):
             if 'nrg' in json_state:
                 nrg = json_state['nrg']
                 nrg_curr = (int(nrg[4]) + int(nrg[5]) + int(nrg[6])) / 10.0
-                self._set_output_value(self.PIN_O_N_NRG_CURR, nrg_curr)
+                self.set_output_value_sbc(self.PIN_O_N_NRG_CURR, nrg_curr)
                 try:
                     nrg_json = {"V L1": nrg[0], "V L2": nrg[1], "V L3": nrg[2], "V N": nrg[3],
                                 "A L1": nrg[4] / 10.0, "A L2": nrg[5] / 10.0,
@@ -258,199 +268,199 @@ class Go_eCharger_14105_14105(hsl20_4.BaseModule):
                                 "kW L2": nrg[8] / 10.0, "kW L3": nrg[9] / 10.0, "kW N": nrg[10] / 10.0,
                                 "kW Sum": nrg[11] / 100.0,
                                 "P% L1": nrg[12], "P% L2": nrg[13], "P% L3": nrg[14], "P% N": nrg[15]}
-                    self._set_output_value(self.PIN_O_NRG_JSON, nrg_json)
+                    self.set_output_value_sbc(self.PIN_O_NRG_JSON, nrg_json)
                 except Exception as e:
                     self.DEBUG.add_message("Error while compiling nrg_json " + str(e))
 
             if 'fwv' in json_state:
                 s_fwv = json_state['fwv']
-                self._set_output_value(self.PIN_O_S_FWV, str(s_fwv))
+                self.set_output_value_sbc(self.PIN_O_S_FWV, str(s_fwv))
             if 'sse' in json_state:
                 s_sse = json_state['sse']
-                self._set_output_value(self.PIN_O_S_SSE, int(s_sse))
+                self.set_output_value_sbc(self.PIN_O_S_SSE, int(s_sse))
             if 'eca' in json_state:
                 n_eca = int(json_state['eca']) / 10.0
-                self._set_output_value(self.PIN_O_N_ECA, float(n_eca))
+                self.set_output_value_sbc(self.PIN_O_N_ECA, float(n_eca))
             if 'ecr' in json_state:
                 n_ecr = int(json_state['ecr']) / 10.0
-                self._set_output_value(self.PIN_O_N_ECR, float(n_ecr))
+                self.set_output_value_sbc(self.PIN_O_N_ECR, float(n_ecr))
             if 'ecd' in json_state:
                 n_ecd = int(json_state['ecd']) / 10.0
-                self._set_output_value(self.PIN_O_N_ECD, float(n_ecd))
+                self.set_output_value_sbc(self.PIN_O_N_ECD, float(n_ecd))
             if 'ec4' in json_state:
                 n_ec4 = int(json_state['ec4']) / 10.0
-                self._set_output_value(self.PIN_O_N_EC4, float(n_ec4))
+                self.set_output_value_sbc(self.PIN_O_N_EC4, float(n_ec4))
             if 'ec5' in json_state:
                 n_ec5 = int(json_state['ec5']) / 10.0
-                self._set_output_value(self.PIN_O_N_EC5, float(n_ec5))
+                self.set_output_value_sbc(self.PIN_O_N_EC5, float(n_ec5))
             if 'ec6' in json_state:
                 n_ec6 = int(json_state['ec6']) / 10.0
-                self._set_output_value(self.PIN_O_N_EC6, float(n_ec6))
+                self.set_output_value_sbc(self.PIN_O_N_EC6, float(n_ec6))
             if 'ec7' in json_state:
                 n_ec7 = int(json_state['ec7']) / 10.0
-                self._set_output_value(self.PIN_O_N_EC7, float(n_ec7))
+                self.set_output_value_sbc(self.PIN_O_N_EC7, float(n_ec7))
             if 'ec8' in json_state:
                 n_ec8 = int(json_state['ec8']) / 10.0
-                self._set_output_value(self.PIN_O_N_EC8, float(n_ec8))
+                self.set_output_value_sbc(self.PIN_O_N_EC8, float(n_ec8))
             if 'ec9' in json_state:
                 n_ec9 = int(json_state['ec9']) / 10.0
-                self._set_output_value(self.PIN_O_N_EC9, float(n_ec9))
+                self.set_output_value_sbc(self.PIN_O_N_EC9, float(n_ec9))
             if 'ec1' in json_state:
                 n_ec1 = int(json_state['ec1']) / 10.0
-                self._set_output_value(self.PIN_O_N_EC1, float(n_ec1))
+                self.set_output_value_sbc(self.PIN_O_N_EC1, float(n_ec1))
             if 'rca' in json_state:
                 s_rca = json_state['rca']
-                self._set_output_value(self.PIN_O_S_RCA, str(s_rca))
+                self.set_output_value_sbc(self.PIN_O_S_RCA, str(s_rca))
             if 'rcr' in json_state:
                 s_rcr = json_state['rcr']
-                self._set_output_value(self.PIN_O_S_RCR, str(s_rcr))
+                self.set_output_value_sbc(self.PIN_O_S_RCR, str(s_rcr))
             if 'rcd' in json_state:
                 s_rcd = json_state['rcd']
-                self._set_output_value(self.PIN_O_S_RCD, str(s_rcd))
+                self.set_output_value_sbc(self.PIN_O_S_RCD, str(s_rcd))
             if 'rc4' in json_state:
                 s_rc4 = json_state['rc4']
-                self._set_output_value(self.PIN_O_S_RC4, str(s_rc4))
+                self.set_output_value_sbc(self.PIN_O_S_RC4, str(s_rc4))
             if 'rc5' in json_state:
                 s_rc5 = json_state['rc5']
-                self._set_output_value(self.PIN_O_S_RC5, str(s_rc5))
+                self.set_output_value_sbc(self.PIN_O_S_RC5, str(s_rc5))
             if 'rc6' in json_state:
                 s_rc6 = json_state['rc6']
-                self._set_output_value(self.PIN_O_S_RC6, str(s_rc6))
+                self.set_output_value_sbc(self.PIN_O_S_RC6, str(s_rc6))
             if 'rc7' in json_state:
                 s_rc7 = json_state['rc7']
-                self._set_output_value(self.PIN_O_S_RC7, str(s_rc7))
+                self.set_output_value_sbc(self.PIN_O_S_RC7, str(s_rc7))
             if 'rc8' in json_state:
                 s_rc8 = json_state['rc8']
-                self._set_output_value(self.PIN_O_S_RC8, str(s_rc8))
+                self.set_output_value_sbc(self.PIN_O_S_RC8, str(s_rc8))
             if 'rc9' in json_state:
                 s_rc9 = json_state['rc9']
-                self._set_output_value(self.PIN_O_S_RC9, str(s_rc9))
+                self.set_output_value_sbc(self.PIN_O_S_RC9, str(s_rc9))
             if 'rc1' in json_state:
                 s_rc1 = json_state['rc1']
-                self._set_output_value(self.PIN_O_S_RC1, str(s_rc1))
+                self.set_output_value_sbc(self.PIN_O_S_RC1, str(s_rc1))
             if 'tme' in json_state:
                 s_tme = json_state['tme']
                 # ddmmyyhhmi -> dd.mm.yyyy hh:mi
                 if len(s_tme) == 10:
                     s_tme = s_tme[0:1] + '.' + s_tme[2:3] + s_tme[4:5] + ' ' + s_tme[6:7] + ":" + s_tme[8:9]
-                self._set_output_value(self.PIN_O_S_TME, str(s_tme))
+                self.set_output_value_sbc(self.PIN_O_S_TME, str(s_tme))
             if 'amp' in json_state:
                 n_amp = json_state['amp']
-                self._set_output_value(self.PIN_O_N_AMP, int(n_amp))
+                self.set_output_value_sbc(self.PIN_O_N_AMP, int(n_amp))
             if 'ast' in json_state:
                 n_ast = json_state['ast']
-                self._set_output_value(self.PIN_O_N_AST, int(n_ast))
+                self.set_output_value_sbc(self.PIN_O_N_AST, int(n_ast))
             if 'alw' in json_state:
                 n_alw = json_state['alw']
-                self._set_output_value(self.PIN_O_N_ALW, int(n_alw))
+                self.set_output_value_sbc(self.PIN_O_N_ALW, int(n_alw))
             if 'stp' in json_state:
                 n_stp = json_state['stp']
-                self._set_output_value(self.PIN_O_N_STP, int(n_stp))
+                self.set_output_value_sbc(self.PIN_O_N_STP, int(n_stp))
             if 'dwo' in json_state:
                 n_dwo = int(json_state['dwo']) / 10.0
-                self._set_output_value(self.PIN_O_N_DWO, float(n_dwo))
+                self.set_output_value_sbc(self.PIN_O_N_DWO, float(n_dwo))
             if 'wss' in json_state:
                 s_wss = json_state['wss']
-                self._set_output_value(self.PIN_O_S_WSS, str(s_wss))
+                self.set_output_value_sbc(self.PIN_O_S_WSS, str(s_wss))
             if 'wke' in json_state:
                 s_wke = json_state['wke']
-                self._set_output_value(self.PIN_O_S_WKE, str(s_wke))
+                self.set_output_value_sbc(self.PIN_O_S_WKE, str(s_wke))
             if 'wen' in json_state:
                 n_wen = json_state['wen']
-                self._set_output_value(self.PIN_O_N_WEN, str(n_wen))
+                self.set_output_value_sbc(self.PIN_O_N_WEN, str(n_wen))
             if 'tof' in json_state:
                 n_tof = json_state['tof']
-                self._set_output_value(self.PIN_O_N_TOF, str(n_tof))
+                self.set_output_value_sbc(self.PIN_O_N_TOF, str(n_tof))
             if 'tds' in json_state:
                 n_tds = json_state['tds']
-                self._set_output_value(self.PIN_O_N_TDS, str(n_tds))
+                self.set_output_value_sbc(self.PIN_O_N_TDS, str(n_tds))
             if 'lbr' in json_state:
                 n_lbr = int(json_state['lbr']) / 255.0 * 100
-                self._set_output_value(self.PIN_O_N_LBR, int(n_lbr))
+                self.set_output_value_sbc(self.PIN_O_N_LBR, int(n_lbr))
             if 'aho' in json_state:
                 n_aho = json_state['aho']
-                self._set_output_value(self.PIN_O_N_AHO, str(n_aho))
+                self.set_output_value_sbc(self.PIN_O_N_AHO, str(n_aho))
             if 'afi' in json_state:
                 n_afi = json_state['afi']
-                self._set_output_value(self.PIN_O_N_AFI, str(n_afi))
+                self.set_output_value_sbc(self.PIN_O_N_AFI, str(n_afi))
             if 'ama' in json_state:
                 n_ama = json_state['ama']
-                self._set_output_value(self.PIN_O_N_AMA, str(n_ama))
+                self.set_output_value_sbc(self.PIN_O_N_AMA, str(n_ama))
             if 'al1' in json_state:
                 n_al1 = json_state['al1']
-                self._set_output_value(self.PIN_O_N_AL1, str(n_al1))
+                self.set_output_value_sbc(self.PIN_O_N_AL1, str(n_al1))
             if 'al2' in json_state:
                 n_al2 = json_state['al2']
-                self._set_output_value(self.PIN_O_N_AL2, str(n_al2))
+                self.set_output_value_sbc(self.PIN_O_N_AL2, str(n_al2))
             if 'al3' in json_state:
                 n_al3 = json_state['al3']
-                self._set_output_value(self.PIN_O_N_AL3, str(n_al3))
+                self.set_output_value_sbc(self.PIN_O_N_AL3, str(n_al3))
             if 'al4' in json_state:
                 n_al4 = json_state['al4']
-                self._set_output_value(self.PIN_O_N_AL4, str(n_al4))
+                self.set_output_value_sbc(self.PIN_O_N_AL4, str(n_al4))
             if 'al5' in json_state:
                 n_al5 = json_state['al5']
-                self._set_output_value(self.PIN_O_N_AL5, str(n_al5))
+                self.set_output_value_sbc(self.PIN_O_N_AL5, str(n_al5))
             if 'cid' in json_state:
                 n_cid = json_state['cid']
-                self._set_output_value(self.PIN_O_N_CID, str(n_cid))
+                self.set_output_value_sbc(self.PIN_O_N_CID, str(n_cid))
             if 'cch' in json_state:
                 n_cch = json_state['cch']
-                self._set_output_value(self.PIN_O_N_CCH, str(n_cch))
+                self.set_output_value_sbc(self.PIN_O_N_CCH, str(n_cch))
             if 'cfi' in json_state:
                 n_cfi = json_state['cfi']
-                self._set_output_value(self.PIN_O_N_CFI, str(n_cfi))
+                self.set_output_value_sbc(self.PIN_O_N_CFI, str(n_cfi))
             if 'lse' in json_state:
                 n_lse = json_state['lse']
-                self._set_output_value(self.PIN_O_N_LSE, str(n_lse))
+                self.set_output_value_sbc(self.PIN_O_N_LSE, str(n_lse))
             if 'ust' in json_state:
                 n_ust = json_state['ust']
-                self._set_output_value(self.PIN_O_N_UST, str(n_ust))
+                self.set_output_value_sbc(self.PIN_O_N_UST, str(n_ust))
             if 'wak' in json_state:
                 s_wak = json_state['wak']
-                self._set_output_value(self.PIN_O_S_WAK, str(s_wak))
+                self.set_output_value_sbc(self.PIN_O_S_WAK, str(s_wak))
             if 'r1x' in json_state:
                 n_r1_x = json_state['r1x']
-                self._set_output_value(self.PIN_O_N_R1X, str(n_r1_x))
+                self.set_output_value_sbc(self.PIN_O_N_R1X, str(n_r1_x))
             if 'dto' in json_state:
                 n_dto = json_state['dto']
-                self._set_output_value(self.PIN_O_N_DTO, str(n_dto))
+                self.set_output_value_sbc(self.PIN_O_N_DTO, str(n_dto))
             if 'nmo' in json_state:
                 n_nmo = json_state['nmo']
-                self._set_output_value(self.PIN_O_N_NMO, str(n_nmo))
+                self.set_output_value_sbc(self.PIN_O_N_NMO, str(n_nmo))
             if 'rna' in json_state:
                 n_rna = json_state['rna']
-                self._set_output_value(self.PIN_O_S_RNA, str(n_rna))
+                self.set_output_value_sbc(self.PIN_O_S_RNA, str(n_rna))
             if 'rnm' in json_state:
                 n_rnm = json_state['rnm']
-                self._set_output_value(self.PIN_O_S_RNM, str(n_rnm))
+                self.set_output_value_sbc(self.PIN_O_S_RNM, str(n_rnm))
             if 'rne' in json_state:
                 n_rne = json_state['rne']
-                self._set_output_value(self.PIN_O_S_RNE, str(n_rne))
+                self.set_output_value_sbc(self.PIN_O_S_RNE, str(n_rne))
             if 'rn4' in json_state:
                 n_rn4 = json_state['rn4']
-                self._set_output_value(self.PIN_O_S_RN4, str(n_rn4))
+                self.set_output_value_sbc(self.PIN_O_S_RN4, str(n_rn4))
             if 'rn5' in json_state:
                 n_rn5 = json_state['rn5']
-                self._set_output_value(self.PIN_O_S_RN5, str(n_rn5))
+                self.set_output_value_sbc(self.PIN_O_S_RN5, str(n_rn5))
             if 'rn6' in json_state:
                 n_rn6 = json_state['rn6']
-                self._set_output_value(self.PIN_O_S_RN6, str(n_rn6))
+                self.set_output_value_sbc(self.PIN_O_S_RN6, str(n_rn6))
             if 'rn7' in json_state:
                 n_rn7 = json_state['rn7']
-                self._set_output_value(self.PIN_O_S_RN7, str(n_rn7))
+                self.set_output_value_sbc(self.PIN_O_S_RN7, str(n_rn7))
             if 'rn8' in json_state:
                 n_rn8 = json_state['rn8']
-                self._set_output_value(self.PIN_O_S_RN8, str(n_rn8))
+                self.set_output_value_sbc(self.PIN_O_S_RN8, str(n_rn8))
             if 'rn9' in json_state:
                 n_rn9 = json_state['rn9']
-                self._set_output_value(self.PIN_O_S_RN9, str(n_rn9))
+                self.set_output_value_sbc(self.PIN_O_S_RN9, str(n_rn9))
             if 'rn1' in json_state:
                 n_rn1 = json_state['rn1']
-                self._set_output_value(self.PIN_O_S_RN1, str(n_rn1))
+                self.set_output_value_sbc(self.PIN_O_S_RN1, str(n_rn1))
             if 'upd' in json_state:
                 n_upd = json_state['upd']
-                self._set_output_value(self.PIN_O_S_RN1, int(n_upd))
+                self.set_output_value_sbc(self.PIN_O_S_RN1, int(n_upd))
         except Exception as e:
             json_state = []
             self.DEBUG.add_message("14105 in 'readJson': " + str(e))
@@ -481,6 +491,7 @@ class Go_eCharger_14105_14105(hsl20_4.BaseModule):
 
     def on_init(self):
         self.DEBUG = self.FRAMEWORK.create_debug_section()
+        self.g_out_sbc = {}  # type: {int, object}
         self.m_index2key = {}
         self.m_index2key = {str(self.PIN_I_N_AMP): 'amp',
                             str(self.PIN_I_N_AST): 'ast',

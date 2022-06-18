@@ -3,6 +3,7 @@
 ## Beschreibung 
 
 Der Baustein dient zur Kommunikation mit einer [go-e](https://go-e.co/) Ladestation / Wallbox, s. [API](https://github.com/goecharger/go-eCharger-API-v1)
+Ab v0.7 sind alle Ausgänge als send-by-change (sbc) ausgeführt.
 
 ## Eingänge
 
@@ -38,14 +39,16 @@ Der Baustein dient zur Kommunikation mit einer [go-e](https://go-e.co/) Ladestat
 
 ### Change Log
 
+ - v0.7
+     - Ausgänge sind sbc 
  - v0.6
      - Refactoring
  - v0.5
      - Fix: Ausgang TME liefert Zeit unformatiert
-	 - Ausgang aktueller Stromfluss auf L1+L2+L3 ergänzt
+     - Ausgang aktueller Stromfluss auf L1+L2+L3 ergänzt
  - v0.2
      - Referenzen auf API in Hilfe ergänzt
-	 - Ein-/Ausgänge gem. API benannt
+     - Ein-/Ausgänge gem. API benannt
  - v0.1
      - Initial
 
