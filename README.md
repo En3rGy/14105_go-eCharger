@@ -2,55 +2,56 @@
 
 ## Beschreibung 
 
-Der Baustein dient zur Kommunikation mit einer [go-e](https://go-e.co/) Ladestation / Wallbox, s. [API](https://github.com/goecharger/go-eCharger-API-v1)
+Der Baustein dient zur Kommunikation mit einer [go-e](https://go-e.co/) Ladestation / Wallbox, s. [API](https://github.com/goecharger/go-eCharger-API-v1).
 Ab v0.7 sind alle Ausgänge als send-by-change (sbc) ausgeführt.
 
 ## Eingänge
 
-| Nr. | Name | Initialisierung | Beschreibung |
-| --- | --- | --- | --- |
-| 1 | IP | | IP der Wallbox |
-| 2 | Port | 0 | Port der Wallbox |
-| 3 | Intervall | 0 | Bei einem Wert <> 0 werden die Daten go-e Wallbox zyklisch mit dem angegebenen Intervall in Sekunden abgerufen. |
-| 4 | Trigger | 0 | Bei einem Wert <> 0 werden die Daten go-e Wallbox abgerufen. |
-| 5ff | ... | ... | Für die weiteren Parameter, s. [go-eCharger API](https://github.com/goecharger/go-eCharger-API-v1). *Von der API abweichende Einheiten sind am jew. Ein- Ausgang des Bausteins angegeben.* |
+| Nr. | Name      | Initialisierung | Beschreibung                                                                                                                                                                               |
+|-----|-----------|-----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1   | IP        |                 | IP der Wallbox                                                                                                                                                                             |
+| 2   | Port      | 0               | Port der Wallbox                                                                                                                                                                           |
+| 3   | Intervall | 0               | Bei einem Wert <> 0 werden die Daten go-e Wallbox zyklisch mit dem angegebenen Intervall in Sekunden abgerufen.                                                                            |
+| 4   | Trigger   | 0               | Bei einem Wert <> 0 werden die Daten go-e Wallbox abgerufen.                                                                                                                               |
+| 5ff | ...       | ...             | Für die weiteren Parameter, s. [go-eCharger API](https://github.com/goecharger/go-eCharger-API-v1). *Von der API abweichende Einheiten sind am jew. Ein- Ausgang des Bausteins angegeben.* |
 
 ## Ausgänge
 
-| Nr. | Name | Initialisierung | Beschreibung |
-| --- | --- | --- | --- |
-| 1 | Online 1 | 0 | 1, wenn Wallbox erreichbar; 0, wenn nicht |
-| 2ff | ... | ... | Für die weiteren Parameter, s. [go-eCharger API](https://github.com/goecharger/go-eCharger-API-v1). *Von der API abweichende Einheiten sind am jew. Ein- Ausgang des Bausteins angegeben.* |
-| | nrg / Json | | Werte des Strom und Spannungssensor als Json Array, z.B. "{'V N': 1, 'P% L2': 0, 'P% L3': 0, 'P% L1': 0, 'V L2': 220, 'V L3': 219, 'kW L1': 0.0, 'V L1': 218, 'kW N': 0.0, 'P% N': 0, 'kW L3': 0.0, 'kW Sum': 0.0, 'kW L2': 0.0, 'A L3': 0.0, 'A L2': 0.0, 'A L1': 0.0}"
+| Nr. | Name       | Initialisierung | Beschreibung                                                                                                                                                                                                                                                             |
+|-----|------------|-----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1   | Online 1   | 0               | 1, wenn Wallbox erreichbar; 0, wenn nicht                                                                                                                                                                                                                                |
+| 2ff | ...        | ...             | Für die weiteren Parameter, s. [go-eCharger API](https://github.com/goecharger/go-eCharger-API-v1). *Von der API abweichende Einheiten sind am jew. Ein- Ausgang des Bausteins angegeben.*                                                                               |
+|     | nrg / Json |                 | Werte des Strom und Spannungssensor als Json Array, z.B. `{"V N": 1, "P% L2": 0, "P% L3": 0, "P% L1": 0, "V L2": 220, "V L3": 219, "kW L1": 0.0, "V L1": 218, "kW N": 0.0, "P% N": 0, "kW L3": 0.0, "kW Sum": 0.0, "kW L2": 0.0, "A L32: 0.0, "A L2": 0.0, "A L1": 0.0}` |
 
 ## Beispielwerte
 
 | Eingang | Ausgang |
-| --- | --- |
-| - | - |
+|---------|---------|
+| -       | -       |
 
 
 ## Other
 
-- Neuberechnug beim Start: Nein
+- Neuberechnung beim Start: Nein
 - Baustein ist remanent: nein
 - Interne Bezeichnung: 11083
 - Kategorie: Datenaustausch
 
 ### Change Log
 
- - v0.7
-     - Ausgänge sind sbc 
- - v0.6
-     - Refactoring
- - v0.5
-     - Fix: Ausgang TME liefert Zeit unformatiert
-     - Ausgang aktueller Stromfluss auf L1+L2+L3 ergänzt
- - v0.2
-     - Referenzen auf API in Hilfe ergänzt
-     - Ein-/Ausgänge gem. API benannt
- - v0.1
-     - Initial
+- v0.8
+  - Fixed: Berechnung des tme Rückgabewertes
+  - Fixed: nrg wird als json-konformer String ausgegeben (" statt ')
+  - Impr.: Refactoring tests
+- v0.7: Ausgänge sind sbc 
+- v0.6: Refactoring
+- v0.5
+    - Fix: Ausgang TME liefert Zeit unformatiert
+    - Ausgang aktueller Stromfluss auf L1+L2+L3 ergänzt
+- v0.2
+    - Referenzen auf API in Hilfe ergänzt
+    - Ein-/Ausgänge gem. API benannt
+- v0.1: Initial
 
 
 ### Open Issues / Know Bugs
@@ -65,7 +66,7 @@ Questions can be addressed as new threads at the [knx-user-forum.de](https://knx
 
 ### Code
 
-Der Code des Bausteins befindet sich in der hslz Datei oder auf [github](https://github.com/En3rGy/14105_go-eCharger).
+Der Code des Bausteins befindet sich auf [github](https://github.com/En3rGy/14105_go-eCharger).
 
 ### Devleopment Environment
 
@@ -86,7 +87,7 @@ Der Code des Bausteins befindet sich in der hslz Datei oder auf [github](https:/
 
 ## Licence
 
-Copyright 2021 T. Paul
+Copyright 2023 T. Paul
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

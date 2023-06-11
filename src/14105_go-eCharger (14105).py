@@ -170,9 +170,9 @@ class Go_eCharger_14105_14105(hsl20_4.BaseModule):
             response = http_client.getresponse()
             status = response.status
             data = {'data': response.read(), 'status': status}
-            self.DEBUG.add_message("14105: http response code: " + str(status))
+            self.DEBUG.add_message("Module ID {} : get_data : status {}".format(self._get_module_id(), str(status)))
         except Exception as e:
-            self.DEBUG.add_message("14105: " + str(e))
+            self.DEBUG.add_message("Module ID {} : get_data : ".format(str(e)))
         finally:
             if http_client:
                 http_client.close()
@@ -181,7 +181,7 @@ class Go_eCharger_14105_14105(hsl20_4.BaseModule):
             self.read_json(data['data'])
             self.set_output_value_sbc(self.PIN_O_N_ONLINE, 1)
         else:
-            self.DEBUG.add_message("14105: Could not receive data")
+            self.DEBUG.add_message("Module ID {} : get_data : ".format(self._get_module_id(), "No data received"))
             self.set_output_value_sbc(self.PIN_O_N_ONLINE, 0)
 
         if n_interval > 0:
@@ -268,9 +268,10 @@ class Go_eCharger_14105_14105(hsl20_4.BaseModule):
                                 "kW L2": nrg[8] / 10.0, "kW L3": nrg[9] / 10.0, "kW N": nrg[10] / 10.0,
                                 "kW Sum": nrg[11] / 100.0,
                                 "P% L1": nrg[12], "P% L2": nrg[13], "P% L3": nrg[14], "P% N": nrg[15]}
-                    self.set_output_value_sbc(self.PIN_O_NRG_JSON, nrg_json)
+                    self.set_output_value_sbc(self.PIN_O_NRG_JSON, json.dumps(nrg_json))
                 except Exception as e:
-                    self.DEBUG.add_message("Error while compiling nrg_json " + str(e))
+                    self.DEBUG.add_message("Module ID {} : read_json : Error compiling nrg_json '{}'".format(
+                        self._get_module_id(), str(e)))
 
             if 'fwv' in json_state:
                 s_fwv = json_state['fwv']
@@ -340,9 +341,14 @@ class Go_eCharger_14105_14105(hsl20_4.BaseModule):
                 self.set_output_value_sbc(self.PIN_O_S_RC1, str(s_rc1))
             if 'tme' in json_state:
                 s_tme = json_state['tme']
-                # ddmmyyhhmi -> dd.mm.yyyy hh:mi
+                # ddmmyyHHMM -> dd.mm.yyyy HH:MM
                 if len(s_tme) == 10:
-                    s_tme = s_tme[0:1] + '.' + s_tme[2:3] + s_tme[4:5] + ' ' + s_tme[6:7] + ":" + s_tme[8:9]
+                    dd = s_tme[0:2]
+                    mm = s_tme[2:4]
+                    yy = s_tme[4:6]
+                    HH = s_tme[6:8]
+                    MM = s_tme[8:10]
+                    s_tme = "%s.%s.20%s %s:%s" % (dd, mm, yy, HH, MM)
                 self.set_output_value_sbc(self.PIN_O_S_TME, str(s_tme))
             if 'amp' in json_state:
                 n_amp = json_state['amp']
@@ -463,7 +469,7 @@ class Go_eCharger_14105_14105(hsl20_4.BaseModule):
                 self.set_output_value_sbc(self.PIN_O_S_RN1, int(n_upd))
         except Exception as e:
             json_state = []
-            self.DEBUG.add_message("14105 in 'readJson': " + str(e))
+            self.DEBUG.add_message("Module ID {} : read_json : {}".format(self._get_module_id(), str(e)))
 
         return json.dumps(json_state)
 
@@ -483,7 +489,7 @@ class Go_eCharger_14105_14105(hsl20_4.BaseModule):
             self.read_json(data['data'])
             return data
         except Exception as e:
-            self.DEBUG.add_message("14105 in 'httpGet': " + str(e))
+            self.DEBUG.add_message("Module ID {} : httpGet : {}".format(self._get_module_id(), str(e)))
             return data
         finally:
             if http_client:
