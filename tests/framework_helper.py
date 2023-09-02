@@ -79,8 +79,8 @@ class hsl20_4:
             return self.my_ip
 
         def get_instance_by_id(self, id):
-            # type: (int) -> Go_eCharger_14105_14105
-            return Go_eCharger_14105_14105(0)
+            # type: (int) -> Zoe_14106_14106
+            return Zoe_14106_14106(0)
 
     class DebugHelper:
         def __init__(self):
@@ -93,3 +93,7 @@ class hsl20_4:
         def add_message(self, msg):
             curr_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
             print("{time}\t# ADD MSG # {msg}".format(time=curr_time, msg=msg))
+
+        def add_exception(self, msg):
+            curr_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
+            print("{time}\t# ADD EXCEPTION # {msg}".format(time=curr_time, msg=msg))
