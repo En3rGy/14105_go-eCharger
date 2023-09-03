@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
     <modules>
-        <module category="Datenaustausch" context="hsl20_3_go-eCharger" id="14105" name="go-eCharger (14105)" version="0.8">
+        <module category="Datenaustausch" context="hsl20_3_go-eCharger" id="14105" name="go-eCharger (14105)" version="0.9">
             <inputs>
             	<input type="string" const_name="s_ip" init_value="">IP</input>
             	<input type="number" const_name="n_port" init_value="80">Port</input>

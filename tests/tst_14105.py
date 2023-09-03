@@ -84,6 +84,15 @@ class RequirementsVerification(unittest.TestCase):
         self.assertTrue('"V L2": 1' in self.obj.debug_output_value[self.obj.PIN_O_NRG_JSON])
         self.assertTrue('"kW Sum": 0.11' in self.obj.debug_output_value[self.obj.PIN_O_NRG_JSON])
 
+    def test_dws(self):
+        self.logger.info("###test_dws")
+        # Beispiel: 100'000 bedeutet, 1'000'000 Ws (= 277Wh = 0.277kWh)
+        js = '{"dws": 100000}'
+
+        self.obj.read_json(js)
+        self.obj.debug_output_value[self.obj.PIN_O_N_DWS]
+        self.assertEqual(0.277, self.obj.debug_output_value[self.obj.PIN_O_N_DWS])
+
     def test_interval(self):
         self.logger.info("###test_interval")
         self.obj.g_out_sbc[self.obj.PIN_O_N_ONLINE] = False

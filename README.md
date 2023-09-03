@@ -39,6 +39,7 @@ Ab v0.7 sind alle Ausgänge als send-by-change (sbc) ausgeführt.
 
 ### Change Log
 
+- v0.9: Fixed [Issue #8](https://github.com/En3rGy/14105_go-eCharger/issues/8): Skalierung von DWS von 1 / 1.000 auf 1 / 100 korrigiert
 - v0.8
   - Fixed: Berechnung des tme Rückgabewertes
   - Fixed: nrg wird als json-konformer String ausgegeben (" statt ')
